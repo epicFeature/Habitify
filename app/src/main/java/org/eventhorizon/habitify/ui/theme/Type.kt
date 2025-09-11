@@ -53,12 +53,12 @@ private val nunitoFont = FontFamily(
 val onbTitleTextStyle = TextStyle(
     fontFamily = nunitoFont,
     fontWeight = FontWeight.Bold,
-    fontSize = 32.sp,
+    fontSize = 26.sp,
     letterSpacing = 0.sp,
     color = AppColor.OnbTextDarkPurple
 )
 
-val onbBasicTextStyle = TextStyle(
+val onbSubtitleTextStyle = TextStyle(
     fontFamily = manropeFont,
     fontWeight = FontWeight.Bold,
     fontSize = 18.sp,
@@ -66,11 +66,13 @@ val onbBasicTextStyle = TextStyle(
     color = AppColor.OnbTextDarkPurple
 )
 
-val onbOrangeTextStyle = TextStyle(
+val onbSkipNextTextStyle = TextStyle(
     fontFamily = manropeFont,
     fontWeight = FontWeight.Bold,
-    fontSize = 18.sp,
+    fontSize = 14.sp,
     letterSpacing = 0.sp,
-    color = AppColor.OnbTextOrange
+    color = AppColor.OnbTextDarkPurple
 )
+
+
 

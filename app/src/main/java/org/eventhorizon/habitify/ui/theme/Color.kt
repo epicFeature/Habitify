@@ -16,6 +16,9 @@ object AppColor {
     val OnbTextOrange = Color(0xFFFC9D45) //Todo Унифицировать и уменьшить кол-во цветов
     val OnbDotOrange = Color(0xFFF9B566)
     val OnbDotPurple = Color(0xFF573353)
+    val OnbDotPurpleShadow = Color(0x33573353)
     val OnbBtnOrange = Color(0xFFFDA758)
     val OnbBtnDisabledOrange = Color(0x99FDA758)
+
+    val OnbBtnDisablePurpleText = Color(0x99573353)
 }

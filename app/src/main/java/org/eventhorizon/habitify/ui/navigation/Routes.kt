@@ -7,7 +7,7 @@ enum class Routes(
     val hasBackButton: Boolean = false
 ) {
     ONBOARDING,
-    HOME(title = R.string.home_screen_title),
+    HOME(title = R.string.home_screen_title, hasBackButton = false),
     HABIT_INFO(title = R.string.habit_info_screen_title_default, hasBackButton = true),
     NEW_HABIT(title = R.string.new_habit_screen_title, hasBackButton = true)
 }

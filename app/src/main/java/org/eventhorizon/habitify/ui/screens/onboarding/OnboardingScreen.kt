@@ -1,5 +1,81 @@
 package org.eventhorizon.habitify.ui.screens.onboarding
 
-class OnboardingScreen {
+import OnbPageBasicTopDynamic
+import OnbPageBottomStatic
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
+import org.eventhorizon.habitify.R
+import org.eventhorizon.habitify.ui.screens.onboarding.model.OnbPageData
 
+@Composable
+fun OnboardingScreen(modifier: Modifier, onSkipClick: () -> Unit) {
+    val onbPageDataList = listOf(
+        OnbPageData(
+            titleRes = R.string.onb_screen_title_3,
+            imageRes = R.drawable.bg_onb_3
+        ),
+        OnbPageData(
+            titleRes = R.string.onb_screen_title_4,
+            imageRes = R.drawable.bg_onb_4
+        ),
+        OnbPageData(
+            titleRes = R.string.onb_screen_title_5,
+            imageRes = R.drawable.bg_onb_5
+        )
+    )
+
+    val pagerState = rememberPagerState(pageCount = { onbPageDataList.size })
+    val coroutineScope = rememberCoroutineScope()
+
+    Box(modifier = Modifier.fillMaxHeight()) {
+        OnbPageBottomStatic(
+            modifier = Modifier
+                .wrapContentHeight()
+                .align(Alignment.BottomCenter),
+            onSkipClick = onSkipClick,
+            onNextClick = {
+                if (pagerState.currentPage != onbPageDataList.size - 1) {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                    }
+                }
+            },
+            pagerState = pagerState
+        )
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier
+                .fillMaxHeight()
+                .align(Alignment.TopCenter),
+            verticalAlignment = Alignment.Top
+        ) { page ->
+            OnbPageBasicTopDynamic(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(top = 24.dp),
+                titleRes = onbPageDataList[page].titleRes,
+                imageRes = onbPageDataList[page].imageRes
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun PreviewOnboardingScreen() {
+    OnboardingScreen(
+        modifier = Modifier,
+        onSkipClick = {}
+    )
 }

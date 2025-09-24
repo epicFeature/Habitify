@@ -47,15 +47,20 @@ private val manropeFont = FontFamily(
 )
 
 private val nunitoFont = FontFamily(
-    Font(R.font.nunito_black, weight = FontWeight.ExtraBold, style = FontStyle.Normal)
+    //мягкие толстые буковки
+    Font(R.font.nunito_black, weight = FontWeight.Black, style = FontStyle.Normal),
+    Font(R.font.nunito_bold, weight = FontWeight.Bold, style = FontStyle.Normal),
+    Font(R.font.nunito_regular, weight = FontWeight.Bold, style = FontStyle.Normal),
 )
 
+
+//onboarding
 val onbTitleTextStyle = TextStyle(
     fontFamily = nunitoFont,
-    fontWeight = FontWeight.Bold,
+    fontWeight = FontWeight.Black,
     fontSize = 26.sp,
     letterSpacing = 0.sp,
-    color = AppColor.OnbTextDarkPurple
+    color = AppColor.DarkPurple
 )
 
 val onbSubtitleTextStyle = TextStyle(
@@ -63,7 +68,7 @@ val onbSubtitleTextStyle = TextStyle(
     fontWeight = FontWeight.Bold,
     fontSize = 18.sp,
     letterSpacing = 0.sp,
-    color = AppColor.OnbTextDarkPurple
+    color = AppColor.DarkPurple
 )
 
 val onbSkipNextTextStyle = TextStyle(
@@ -71,8 +76,167 @@ val onbSkipNextTextStyle = TextStyle(
     fontWeight = FontWeight.Bold,
     fontSize = 14.sp,
     letterSpacing = 0.sp,
-    color = AppColor.OnbTextDarkPurple
+    color = AppColor.DarkPurple
 )
 
+//topbar
+val topAppBarTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Bold,
+    fontSize = 18.sp,
+    letterSpacing = 0.sp,
+    color = AppColor.DarkPurple
+)
 
+//homescreen
+val homeQuoteTextStyle = TextStyle(
+    fontFamily = nunitoFont,
+    fontWeight = FontWeight.Black,
+    fontSize = 18.sp,
+    letterSpacing = 0.sp,
+    color = AppColor.DarkPurple
+)
+val homeQuoteAuthorTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Bold,
+    fontSize = 12.sp,
+    letterSpacing = 0.sp,
+    color = AppColor.homeQuoteAuthor
+)
+val homeDateCardDayOfWeekTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Bold,
+    fontSize = 10.sp,
+    letterSpacing = 0.sp,
+    lineHeight = 14.sp,
+    color = AppColor.homeDatePurple50
+)
+val homeDateCardDateTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Bold,
+    fontSize = 16.sp,
+    letterSpacing = (-1).sp,
+    color = AppColor.homeDayOfWeekPurple
+)
+
+val homeChartTitleTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Bold,
+    fontSize = 14.sp,
+    lineHeight = 32.sp,
+    letterSpacing = 0.sp,
+    color = AppColor.homeDayOfWeekPurple
+)
+val homeChartHabitTitleTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Bold,
+    fontSize = 14.sp,
+    letterSpacing = 0.sp,
+    color = AppColor.homeDayOfWeekPurple
+)
+
+//congrats dialog
+val congratsDialogTitleTextStyle = TextStyle(
+    fontFamily = nunitoFont,
+    fontWeight = FontWeight.Medium,
+    fontSize = 24.sp,
+    lineHeight = 32.sp,
+    letterSpacing = 0.sp,
+    color = AppColor.DarkPurple
+)
+val congratsDialogSubtitleTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Medium,
+    fontSize = 16.sp,
+    lineHeight = 22.sp,
+    letterSpacing = 0.sp,
+    color = AppColor.homeQuoteAuthor
+)
+val congratsDialogBtnTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Bold,
+    fontSize = 16.sp,
+    lineHeight = 16.sp,
+    letterSpacing = 0.sp,
+    color = AppColor.dialogTitleColor
+)
+
+//habitInfo
+val habitInfoTopCardTitleTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Bold,
+    fontSize = 16.sp,
+    letterSpacing = (-1).sp,
+    color = AppColor.homeDayOfWeekPurple
+)
+val habitInfoTopCardSubtitleTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Medium,
+    fontSize = 16.sp,
+    lineHeight = 22.sp,
+    letterSpacing = 0.sp,
+    color = AppColor.homeQuoteAuthor
+)
+val calendarMonthTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Bold,
+    fontSize = 16.sp,
+    letterSpacing = 0.sp,
+    color = AppColor.homeDayOfWeekPurple
+)
+val calendarDayOfWeekTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Bold,
+    fontSize = 10.sp,
+    letterSpacing = 0.sp,
+    lineHeight = 14.sp,
+    color = AppColor.homeDatePurple50
+)
+val calendarDateTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Bold,
+    fontSize = 14.sp,
+    letterSpacing = 0.sp,
+    lineHeight = 14.sp,
+    color = AppColor.DarkPurple
+)
+val analyticsTitleTextStyle = TextStyle(
+    fontFamily = nunitoFont,
+    fontWeight = FontWeight.Normal,
+    fontSize = 24.sp,
+    letterSpacing = 0.sp,
+    color = AppColor.DarkPurple
+)
+val analyticsSubtitleTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Medium,
+    fontSize = 12.sp,
+    letterSpacing = 0.sp,
+    color = AppColor.homeDatePurple50
+)
+val habitInfoBtnTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Bold,
+    fontSize = 16.sp,
+    lineHeight = 16.sp,
+    letterSpacing = 0.sp,
+    color = AppColor.dialogTitleColor
+)
+
+//newHabit
+val textFieldTextStyle = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Medium,
+    fontSize = 16.sp,
+    lineHeight = 16.sp,
+    letterSpacing = 0.sp,
+)
+val newHabitOrangeBright = TextStyle(
+    fontFamily = manropeFont,
+    fontWeight = FontWeight.Bold,
+    fontSize = 16.sp,
+    lineHeight = 16.sp,
+    letterSpacing = 0.sp,
+    color = AppColor.OnbBtnOrange
+)
 

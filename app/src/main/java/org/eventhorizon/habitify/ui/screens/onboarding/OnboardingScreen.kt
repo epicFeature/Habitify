@@ -2,6 +2,7 @@ package org.eventhorizon.habitify.ui.screens.onboarding
 
 import OnbPageBasicTopDynamic
 import OnbPageBottomStatic
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.eventhorizon.habitify.R
 import org.eventhorizon.habitify.ui.screens.onboarding.model.OnbPageData
+import org.eventhorizon.habitify.ui.theme.AppColor
 
 @Composable
 fun OnboardingScreen(modifier: Modifier, onSkipClick: () -> Unit) {
@@ -38,7 +40,7 @@ fun OnboardingScreen(modifier: Modifier, onSkipClick: () -> Unit) {
     val pagerState = rememberPagerState(pageCount = { onbPageDataList.size })
     val coroutineScope = rememberCoroutineScope()
 
-    Box(modifier = Modifier.fillMaxHeight()) {
+    Box(modifier = modifier.fillMaxHeight().background(color = AppColor.OnbBgWhite)) {
         OnbPageBottomStatic(
             modifier = Modifier
                 .wrapContentHeight()

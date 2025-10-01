@@ -21,4 +21,15 @@ dependencyResolutionManagement {
 
 rootProject.name = "Habitify"
 include(":app")
- 
+include(":data")
+include(":network")
+include(":database")
+include(":ui")
+include(":navigation")
+include(":feature:home")
+include(":feature:newhabit")
+include(":feature:habitinfo")
+include(":feature:mylibrary")
+include(":feature:onboarding")
+include(":domain")
+include(":datastore")

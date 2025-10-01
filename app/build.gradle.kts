@@ -37,11 +37,18 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
-        compose = true
+        compose = true // Если :app использует Compose
     }
 }
 
 dependencies {
+    // Зависимости от модулей
+    implementation(project(":navigation"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:newhabit"))
+    implementation(project(":feature:habitinfo"))
+    implementation(project(":feature:onboarding"))
+    implementation(project(":ui"))
 
     //Default android
     implementation(libs.androidx.core.ktx)
@@ -54,7 +61,18 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.compose.foundation.layout)
-    implementation(libs.androidx.room.ktx)
+
+    // Pluto
+    debugImplementation(libs.pluto)
+    releaseImplementation(libs.pluto.no.op)
+    debugImplementation(libs.logger)
+    releaseImplementation(libs.logger.no.op)
+    debugImplementation (libs.datastore.pref)
+    releaseImplementation (libs.datastore.pref.no.op)
+    debugImplementation (libs.network)
+    releaseImplementation (libs.network.no.op)
+    debugImplementation (libs.rooms.db)
+    releaseImplementation (libs.rooms.db.no.op)
 
     //Default test
     testImplementation(libs.junit)

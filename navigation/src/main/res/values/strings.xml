@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    //home screen
+    <string name="home_screen_title">Домашняя страница</string>
+
+    //new habit screen
+    <string name="new_habit_screen_title">Новая привычка</string>
+
+    //habit info screen
+    <string name="habit_info_screen_title_default">Название привычки</string>
+</resources>

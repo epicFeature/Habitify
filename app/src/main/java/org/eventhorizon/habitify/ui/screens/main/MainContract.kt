@@ -1,6 +1,7 @@
 package org.eventhorizon.habitify.ui.screens.main
 
 
+/*
 interface MainContract {
     sealed interface MainUiEvent {
         object OnOnboardingFinished : MainUiEvent
@@ -13,4 +14,4 @@ interface MainContract {
             val error: String? = null
         ) : MainUiState
     }
-}
+}*/

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Habitify</string>
-    
+
+    <!--удалить отсюда-->
     //onb screen
     <string name="onb_screen_title_1_2">Добро пожаловать в мир устойчивых привычек</string>
     <string name="onb_screen_title_3">Внедряй новые привычки с легкостью</string>
@@ -10,14 +11,15 @@
     <string name="onb_screen_skip">Пропустить</string>
     <string name="onb_screen_next">Далее</string>
     <string name="onb_screen_get_start">Начнём</string>
+    <!--удалить до сюда-->
 
+    <!--удалить отсюда-->
     //home screen
     <string name="home_screen_title">Домашняя страница</string>
-
     //new habit screen
     <string name="new_habit_screen_title">Новая привычка</string>
-
     //habit info screen
     <string name="habit_info_screen_title_default">Название привычки</string>
+    <!--удалить до сюда-->
 
 </resources>

@@ -1,10 +1,6 @@
 package org.eventhorizon.habitify.ui.screens.main
 
-import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-import jakarta.inject.Inject
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+/*
 
 //@HiltViewModel
 class MainViewModel (): ViewModel() {
@@ -31,4 +27,4 @@ class MainViewModel (): ViewModel() {
     private fun onOnboardingFinished(){
         //сохранять новое состояние в datastore
     }
-}
+}*/

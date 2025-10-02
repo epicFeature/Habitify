@@ -1,7 +1,7 @@
 package org.eventhorizon.habitify.data.di
 
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import org.eventhorizon.habitify.data.utils.SystemDateUtil
@@ -10,9 +10,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class UtilsModule {
+object UtilsModule {
 
-    @Binds
+    @Provides
     @Singleton
-    abstract fun bindDateUtil(systemDateUtil: SystemDateUtil): DateUtil
+    fun provideDateUtil(systemDateUtil: SystemDateUtil): DateUtil {
+        return systemDateUtil
+    }
 }

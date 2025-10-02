@@ -20,7 +20,7 @@ import org.eventhorizon.habitify.feature.onboarding.model.OnbPageData
 import org.eventhorizon.habitify.ui.components.theme.AppColor
 
 @Composable
-fun OnboardingScreen(modifier: Modifier, onSkipClick: () -> Unit) {
+fun OnboardingScreen(modifier: Modifier=Modifier, onOnboardingFinished: () -> Unit) {
     val onbPageDataList = listOf(
         OnbPageData(
             titleRes = R.string.onb_screen_title_3,
@@ -40,20 +40,6 @@ fun OnboardingScreen(modifier: Modifier, onSkipClick: () -> Unit) {
     val coroutineScope = rememberCoroutineScope()
 
     Box(modifier = modifier.fillMaxHeight().background(color = AppColor.OnbBgWhite)) {
-        OnbPageBottomStatic(
-            modifier = Modifier
-                .wrapContentHeight()
-                .align(Alignment.BottomCenter),
-            onSkipClick = onSkipClick,
-            onNextClick = {
-                if (pagerState.currentPage != onbPageDataList.size - 1) {
-                    coroutineScope.launch {
-                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
-                    }
-                }
-            },
-            pagerState = pagerState
-        )
         HorizontalPager(
             state = pagerState,
             modifier = Modifier
@@ -69,6 +55,20 @@ fun OnboardingScreen(modifier: Modifier, onSkipClick: () -> Unit) {
                 imageRes = onbPageDataList[page].imageRes
             )
         }
+        OnbPageBottomStatic(
+            modifier = Modifier
+                .wrapContentHeight()
+                .align(Alignment.BottomCenter),
+            onSkipClick = onOnboardingFinished,
+            onNextClick = {
+                if (pagerState.currentPage != onbPageDataList.size - 1) {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                    }
+                }
+            },
+            pagerState = pagerState
+        )
     }
 }
 
@@ -77,6 +77,6 @@ fun OnboardingScreen(modifier: Modifier, onSkipClick: () -> Unit) {
 private fun PreviewOnboardingScreen() {
     OnboardingScreen(
         modifier = Modifier,
-        onSkipClick = {}
+        onOnboardingFinished = {}
     )
 }

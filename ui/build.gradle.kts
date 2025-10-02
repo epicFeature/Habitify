@@ -50,6 +50,7 @@ dependencies {
 
     // Pluto
     debugImplementation (libs.pluto)
+    debugImplementation(libs.androidx.compose.ui.tooling)
     releaseImplementation (libs.pluto.no.op)
     debugImplementation (libs.logger)
     releaseImplementation (libs.logger.no.op)

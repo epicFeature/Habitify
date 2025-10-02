@@ -8,7 +8,7 @@ data class HabitDbEntity(
     @PrimaryKey(autoGenerate = true) // id будет генерироваться автоматически
     val id: Int = 0,
     val name: String,
-    val color: Long, // Храним цвет как Long (ARGB)
+    val color: String, // Храним цвет как Long (ARGB)
     val daysToFinish: Int,
-    val statistics: HabitStatListDb
+    val statistics: List<HabitStatDb>
 )

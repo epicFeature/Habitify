@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
+import org.eventhorizon.habitify.main.MainAppScreen
 import org.eventhorizon.habitify.ui.components.theme.HabitifyTheme
 
 @AndroidEntryPoint

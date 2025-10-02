@@ -6,23 +6,24 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import org.eventhorizon.habitify.ui.components.theme.AppColor
 import org.eventhorizon.habitify.ui.components.theme.Shapes
 import org.eventhorizon.habitify.ui.components.theme.textFieldTextStyle
 
 @Composable
-fun HabitNameTextField(modifier: Modifier) {
-    val textState = remember { mutableStateOf(TextFieldValue()) }
+fun HabitNameTextField(
+    modifier: Modifier,
+    habitName: String,
+    onHabitNameChanged: (String)->Unit
+) {
+   // val textState = remember { mutableStateOf(TextFieldValue()) }
 
     TextField(
-        value = textState.value,
-        onValueChange = { textState.value = it },
+        value = habitName,//textState.value,
+        onValueChange = onHabitNameChanged,//{ textState.value = it },
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight(),
@@ -47,5 +48,8 @@ fun HabitNameTextField(modifier: Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun PreviewHabitNameTextField() {
-    HabitNameTextField(modifier = Modifier)
+    HabitNameTextField(
+        modifier = Modifier,
+        habitName = "",
+        onHabitNameChanged = {})
 }

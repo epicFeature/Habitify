@@ -22,9 +22,11 @@ import org.eventhorizon.habitify.ui.components.theme.homeChartHabitTitleTextStyl
 import kotlin.math.roundToInt
 
 @Composable
-fun HabitDurationPlan(modifier: Modifier,
-                      onDaysSelected: (Int) -> Unit = {},
-                      color: Color = AppColor.habitIconColorYellow
+fun HabitDurationPlan(
+
+    modifier: Modifier,
+    onDaysSelected: (Int) -> Unit = {},
+    color: Color = AppColor.habitIconColorYellow
 ) {
     val days = listOf(1, 3, 5, 7, 10)
     var sliderPosition by remember { mutableFloatStateOf(0f) }

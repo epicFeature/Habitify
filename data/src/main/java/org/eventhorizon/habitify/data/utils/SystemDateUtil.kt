@@ -8,7 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SystemDateUtil @Inject constructor() : DateUtil {
+class SystemDateUtil @Inject constructor() : DateUtil { //todo зачем тут inject constructor
     @RequiresApi(Build.VERSION_CODES.O)
     override fun today(): LocalDate {
         return LocalDate.now()

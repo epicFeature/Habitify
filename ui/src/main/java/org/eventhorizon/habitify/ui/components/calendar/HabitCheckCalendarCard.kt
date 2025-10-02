@@ -29,7 +29,7 @@ fun HabitCheckCalendarCard(modifier: Modifier = Modifier, color: Color, isChecke
                 .align(Alignment.Center)
             )}
     } else {
-        Box(modifier = Modifier
+        Box(modifier =  modifier
             .size(38.dp)
             .background(color.copy(0.1F), Shapes.medium)
         )

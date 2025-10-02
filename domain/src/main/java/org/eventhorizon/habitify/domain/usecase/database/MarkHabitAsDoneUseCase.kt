@@ -3,7 +3,6 @@ package org.eventhorizon.habitify.domain.usecase.database
 
 import org.eventhorizon.habitify.domain.model.database.Habit
 import org.eventhorizon.habitify.domain.model.database.HabitStat
-import org.eventhorizon.habitify.domain.model.database.HabitStatList
 import org.eventhorizon.habitify.domain.repository.database.HabitRepository
 import org.eventhorizon.habitify.domain.utils.DateUtil
 import java.time.LocalDate
@@ -13,10 +12,11 @@ import javax.inject.Inject
 /**
  * UseCase для отметки о выполнении привычки на определенный день (по умолчанию - сегодня).
  */
+//todo разобраться как работает + скорректировать логику
 class MarkHabitAsDoneUseCase @Inject constructor(
     private val habitRepository: HabitRepository,
     private val updateHabitUseCase: UpdateHabitUseCase,
-    private val dateUtil: DateUtil // <-- Внедряем зависимость Clock
+    private val dateUtil: DateUtil // <-- Внедряем зависимость DateUtil
 ) {
     /**
      * @param habit Привычка для обновления.
@@ -26,7 +26,7 @@ class MarkHabitAsDoneUseCase @Inject constructor(
         // Если дата не передана, получаем ее из нашей абстракции
         val targetDate = date ?: dateUtil.today()
 
-        val updatedStatistics = habit.statistics.habitStatList.toMutableList()
+        val updatedStatistics = habit.statistics.toMutableList()
         val dayStatIndex = updatedStatistics.indexOfFirst { it.day == targetDate }
 
         if (dayStatIndex != -1) {
@@ -39,7 +39,7 @@ class MarkHabitAsDoneUseCase @Inject constructor(
         }
 
         // Создаем обновленную привычку и передаем ее в UpdateHabitUseCase
-        val updatedHabit = habit.copy(statistics = HabitStatList(updatedStatistics))
+        val updatedHabit = habit.copy(statistics = updatedStatistics)
         updateHabitUseCase(updatedHabit)
     }
 }

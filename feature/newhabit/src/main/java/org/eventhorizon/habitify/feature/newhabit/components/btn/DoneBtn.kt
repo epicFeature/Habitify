@@ -8,16 +8,21 @@ import org.eventhorizon.habitify.ui.components.IconData
 import org.eventhorizon.habitify.ui.components.LargeRoundBtn
 
 @Composable
-fun DoneBtn(modifier: Modifier = Modifier, onClick: ()->Unit ) {
+fun DoneBtn(modifier: Modifier = Modifier, onClick: ()->Unit, enabled: Boolean) {
     LargeRoundBtn(
         modifier = modifier,
         iconData = IconData(R.drawable.ic_done, "tick"),
-        onClick = onClick
+        onClick = onClick,
+        enabled = enabled
     )
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun PreviewDoneBtn() {
-    DoneBtn(onClick = {})
+    DoneBtn(
+        onClick = {},
+        modifier = Modifier,
+        enabled = false
+    )
 }

@@ -9,9 +9,9 @@ import org.eventhorizon.habitify.database.entity.HabitDbEntity
 
 @Database(
     entities = [HabitDbEntity::class],
-    version = 1 // Начинаем с версии 1
+    version = 1
 )
-@TypeConverters(Converters::class) // Регистрируем наши конвертеры
+@TypeConverters(Converters::class)
 abstract class HabitDatabase : RoomDatabase() {
 
     abstract fun habitDao(): HabitDao

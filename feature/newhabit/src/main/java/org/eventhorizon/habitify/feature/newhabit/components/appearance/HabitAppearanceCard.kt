@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -18,7 +19,12 @@ import org.eventhorizon.habitify.ui.components.theme.Shapes
 import org.eventhorizon.habitify.ui.components.theme.homeChartHabitTitleTextStyle
 
 @Composable
-fun HabitAppearanceCard(modifier: Modifier, habitName: String="Sleep early") {
+fun HabitAppearanceCard(
+    modifier: Modifier,
+    habitName: String,
+    color: Color,
+    appearanceDays: List<Boolean>
+) {
     Column(
         modifier = modifier
             .background(AppColor.White, Shapes.medium)
@@ -26,7 +32,7 @@ fun HabitAppearanceCard(modifier: Modifier, habitName: String="Sleep early") {
             .wrapContentHeight()
     ) {
         Text(
-            text = habitName.uppercase(),
+            text = habitName.uppercase().ifBlank { "Название привычки" },
             modifier = Modifier
                 .padding(18.dp),
             textAlign = TextAlign.Center,
@@ -37,7 +43,11 @@ fun HabitAppearanceCard(modifier: Modifier, habitName: String="Sleep early") {
             thickness = 1.dp,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
-        HabitAppearDayCardLine(modifier= Modifier.align(Alignment.CenterHorizontally))
+        HabitAppearDayCardLine(
+            modifier= Modifier.align(Alignment.CenterHorizontally),
+            appearanceDays = appearanceDays,
+            color = color
+        )
     }
 }
 
@@ -46,6 +56,8 @@ fun HabitAppearanceCard(modifier: Modifier, habitName: String="Sleep early") {
 private fun PreviewHabitAppearanceCard() {
     HabitAppearanceCard(
         modifier = Modifier,
-        habitName = "Sleep early"
+        habitName = "Sleep early",
+        appearanceDays = listOf(true, true, true, true, false, true, false),
+        color = AppColor.habitIconColorYellow
     )
 }

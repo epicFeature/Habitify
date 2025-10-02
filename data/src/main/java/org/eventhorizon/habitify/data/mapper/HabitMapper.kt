@@ -1,21 +1,28 @@
 package org.eventhorizon.habitify.data.mapper
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import org.eventhorizon.habitify.database.entity.HabitDbEntity
 import org.eventhorizon.habitify.database.entity.HabitStatDb
-import org.eventhorizon.habitify.database.entity.HabitStatListDb
 import org.eventhorizon.habitify.domain.model.database.Habit
 import org.eventhorizon.habitify.domain.model.database.HabitStat
-import org.eventhorizon.habitify.domain.model.database.HabitStatList
+import java.time.LocalDate
 
 
 // Преобразует Entity из базы данных в доменную модель
+@RequiresApi(Build.VERSION_CODES.O)
 fun HabitDbEntity.toDomain(): Habit {
     return Habit(
         id = this.id,
         name = this.name,
         color = this.color,
         daysToFinish = this.daysToFinish,
-        statistics = HabitStatList(this.statistics.habitStatDbList.map { HabitStat(it.day, it.isDone) })
+        statistics = this.statistics.map {
+            HabitStat(
+                LocalDate.parse(it.day),
+                it.isDone
+            )
+        }
     )
 }
 
@@ -26,6 +33,6 @@ fun Habit.toEntity(): HabitDbEntity {
         name = this.name,
         color = this.color,
         daysToFinish = this.daysToFinish,
-        statistics = HabitStatListDb(this.statistics.habitStatList.map { HabitStatDb(it.day, it.isDone) })
+        statistics = this.statistics.map { HabitStatDb(it.day.toString(), it.isDone) }
     )
 }

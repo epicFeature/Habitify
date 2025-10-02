@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.eventhorizon.habitify.feature.habitinfo.components.HabitInfoTopCard
 import org.eventhorizon.habitify.feature.habitinfo.components.calendar.Calendar
-import org.eventhorizon.habitify.feature.habitinfo.components.statistics.HabitInfoStatistics
 import org.eventhorizon.habitify.ui.components.theme.AppColor
 import org.eventhorizon.habitify.ui.components.theme.AppColor.DarkPurple
 import org.eventhorizon.habitify.ui.components.theme.AppColor.OnbBtnDisablePurpleText
@@ -42,8 +41,8 @@ fun HabitInfoScreen(modifier: Modifier = Modifier, habitId: String) {
         Spacer(Modifier.size(16.dp))
         Calendar()
         Spacer(Modifier.size(36.dp))
-        HabitInfoStatistics()
-        Spacer(Modifier.size(16.dp))
+        //HabitInfoStatistics()
+        //Spacer(Modifier.size(16.dp))
         Button(
             onClick = { }, //todo onClick
             modifier = Modifier

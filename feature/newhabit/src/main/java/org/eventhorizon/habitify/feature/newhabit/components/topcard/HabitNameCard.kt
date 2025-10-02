@@ -9,18 +9,28 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.eventhorizon.habitify.ui.components.theme.AppColor
 import org.eventhorizon.habitify.ui.components.theme.Shapes
 
 @Composable
-fun HabitNameCard(modifier: Modifier) {
+fun HabitNameCard(
+    modifier: Modifier,
+    habitName: String,
+    habitColor: Color,
+    onHabitNameChanged: (String) -> Unit
+) {
     Row(
         modifier = modifier
             .fillMaxWidth()
     ) {
-        HabitNameTextField(Modifier.weight(1F))
+        HabitNameTextField(
+            Modifier.weight(1F),
+            habitName = habitName,
+            onHabitNameChanged = onHabitNameChanged,
+        )
         Spacer(Modifier.size(12.dp))
         Box(
             modifier = Modifier
@@ -32,7 +42,7 @@ fun HabitNameCard(modifier: Modifier) {
                 modifier = modifier
                     .align(Alignment.Center)
                     .size(50.dp)
-                    .background(AppColor.habitIconColorYellow, Shapes.medium)
+                    .background(habitColor, Shapes.medium)
             )
         }
     }
@@ -41,5 +51,11 @@ fun HabitNameCard(modifier: Modifier) {
 @Composable
 @Preview(showBackground = true)
 private fun PreviewHabitNameCard() {
-    HabitNameCard(modifier = Modifier.background(AppColor.BgColorLightOrange))
+    HabitNameCard(
+        modifier = Modifier.background(AppColor.BgColorLightOrange),
+        habitName = "Habit Name",
+        habitColor = AppColor.habitIconColorYellow,
+        onHabitNameChanged = {}
+
+    )
 }

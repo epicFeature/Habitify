@@ -1,36 +1,47 @@
 package org.eventhorizon.habitify.data.di
 
-import dagger.Binds
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import org.eventhorizon.habitify.data.repositories.database.HabitRepositoryImpl
 import org.eventhorizon.habitify.data.repositories.datastore.OnboardingRepositoryImpl
 import org.eventhorizon.habitify.data.repositories.network.QuoteApiRepositoryImpl
+import org.eventhorizon.habitify.database.dao.HabitDao
 import org.eventhorizon.habitify.domain.repository.database.HabitRepository
 import org.eventhorizon.habitify.domain.repository.datastore.OnboardingRepository
 import org.eventhorizon.habitify.domain.repository.network.QuoteApiRepository
+import org.eventhorizon.habitify.network.QuoteApiService
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class RepositoryModule {
+object RepositoryModule {
 
-    @Binds
+    @Provides // <-- Изменили @Binds на @Provides
     @Singleton
-    abstract fun bindHabitRepository(
-        habitRepositoryImpl: HabitRepositoryImpl
-    ): HabitRepository
+    fun provideHabitRepository(
+        habitDao: HabitDao // <-- Запрашиваем зависимость здесь
+    ): HabitRepository {
+        // Вручную создаем экземпляр
+        return HabitRepositoryImpl(habitDao)
+    }
 
-    @Binds
+    @Provides
     @Singleton
-    abstract fun bindOnboardingRepository(
-        onboardingRepositoryImpl: OnboardingRepositoryImpl
-    ): OnboardingRepository
+    fun bindOnboardingRepository(
+        dataStore: DataStore<Preferences>
+    ): OnboardingRepository {
+        return OnboardingRepositoryImpl(dataStore)
+    }
 
-    @Binds
+    @Provides
     @Singleton
-    abstract fun bindQuoteRepository(
-        quoteRepositoryImpl: QuoteApiRepositoryImpl
-    ): QuoteApiRepository
+    fun provideQuoteRepository(
+        quoteApiService: QuoteApiService
+    ): QuoteApiRepository {
+        return QuoteApiRepositoryImpl(quoteApiService)
+    }
 }

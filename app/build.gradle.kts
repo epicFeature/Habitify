@@ -49,6 +49,10 @@ dependencies {
     implementation(project(":feature:habitinfo"))
     implementation(project(":feature:onboarding"))
     implementation(project(":ui"))
+    implementation(project(":domain"))
+    // проверить корректно ли
+    implementation(project(":data"))
+
 
     //Default android
     implementation(libs.androidx.core.ktx)
@@ -60,6 +64,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.compose.foundation.layout)
 
     // Pluto

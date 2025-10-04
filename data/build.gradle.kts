@@ -36,8 +36,9 @@ android {
 
 dependencies {
     implementation(project(":domain"))
-    implementation(project(":database"))
-    implementation(project(":network"))
+    implementation(project(":core"))
+    api(project(":database"))
+    api(project(":network"))
     implementation(project(":datastore"))
 
     //Gson

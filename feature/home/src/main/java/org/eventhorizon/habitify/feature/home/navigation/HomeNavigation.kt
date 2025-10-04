@@ -6,7 +6,7 @@ import androidx.navigation.compose.composable
 import org.eventhorizon.habitify.feature.home.HomeScreen
 import org.eventhorizon.habitify.navigation.AppScreens
 
-// feature/home/src/main/java/org/eventhorizon/habitify/feature/home/navigation/HomeNavigation.kt
+
 fun NavGraphBuilder.homeScreen(
     navController: NavHostController // Может понадобиться для внутренних переходов или передачи дальше
     // Можно также передавать конкретные лямбды для навигации на другие фичи,

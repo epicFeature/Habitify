@@ -50,6 +50,7 @@ dependencies {
     implementation(project(":feature:onboarding"))
     implementation(project(":ui"))
     implementation(project(":domain"))
+    implementation(project(":core"))
     // проверить корректно ли
     implementation(project(":data"))
 

@@ -20,7 +20,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
-    @Provides // <-- Изменили @Binds на @Provides
+    @Provides
     @Singleton
     fun provideHabitRepository(
         habitDao: HabitDao // <-- Запрашиваем зависимость здесь

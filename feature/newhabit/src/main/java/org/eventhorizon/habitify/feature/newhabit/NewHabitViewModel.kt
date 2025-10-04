@@ -92,7 +92,6 @@ class NewHabitViewModel @Inject constructor(
     @RequiresApi(Build.VERSION_CODES.O)
     private fun onDoneClick() {
         viewModelScope.launch {
-            // <-- 6. ИСПОЛЬЗУЕМ МАППЕР ДЛЯ ПРЕОБРАЗОВАНИЯ
             val habitToSave = _state.value.habit.toDomain()
 
             // Оборачиваем в try-catch на случай ошибок валидации из UseCase

@@ -19,23 +19,22 @@ fun HabitNameTextField(
     habitName: String,
     onHabitNameChanged: (String)->Unit
 ) {
-   // val textState = remember { mutableStateOf(TextFieldValue()) }
 
     TextField(
-        value = habitName,//textState.value,
-        onValueChange = onHabitNameChanged,//{ textState.value = it },
+        value = habitName,
+        onValueChange = onHabitNameChanged,
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight(),
         shape = Shapes.medium,
         colors = TextFieldDefaults.colors(
-            focusedTextColor = AppColor.DarkPurple, // Фиолетовый цвет вводимого текста
+            focusedTextColor = AppColor.DarkPurple,
             unfocusedTextColor = AppColor.DarkPurple,
             focusedContainerColor = AppColor.White,
             unfocusedContainerColor = AppColor.White,
-            focusedIndicatorColor = Color.Transparent, // Скрываем индикатор
+            focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
-            focusedPlaceholderColor = AppColor.DarkPurple.copy(0.5F), // Цвет хинта
+            focusedPlaceholderColor = AppColor.DarkPurple.copy(0.5F),
             unfocusedPlaceholderColor = AppColor.DarkPurple.copy(0.5F)
         ),
         placeholder = {

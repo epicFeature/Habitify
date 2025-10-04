@@ -17,12 +17,15 @@ fun HabitDbEntity.toDomain(): Habit {
         name = this.name,
         color = this.color,
         daysToFinish = this.daysToFinish,
-        statistics = this.statistics.map {
-            HabitStat(
-                LocalDate.parse(it.day),
-                it.isDone
-            )
-        }
+        statistics = this.statistics.map {it.toDomain()}
+    )
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun HabitStatDb.toDomain(): HabitStat{
+    return HabitStat(
+        day = LocalDate.parse(this.day),
+        isDone = this.isDone
     )
 }
 
@@ -33,6 +36,13 @@ fun Habit.toEntity(): HabitDbEntity {
         name = this.name,
         color = this.color,
         daysToFinish = this.daysToFinish,
-        statistics = this.statistics.map { HabitStatDb(it.day.toString(), it.isDone) }
+        statistics = this.statistics.map { it.toEntity() }
+    )
+}
+
+fun HabitStat.toEntity(): HabitStatDb {
+    return HabitStatDb(
+        day = this.day.toString(),
+        isDone = this.isDone
     )
 }

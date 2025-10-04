@@ -15,13 +15,13 @@ import org.eventhorizon.habitify.ui.components.theme.AppColor
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun CalendarDaysGrid(modifier: Modifier = Modifier, viewModel: CalendarViewModel) { //todo делал дипсик надо будет скорректировать
+fun CalendarDaysGrid(modifier: Modifier = Modifier, viewModel: CalendarViewModel) {
+    //todo надо будет перепроверить и скорректировать
     val days = viewModel.getDays()
 
     LazyVerticalGrid(
         modifier = modifier,
-        columns = GridCells.Fixed(7),
-        //, contentPadding = PaddingValues(horizontal = 6.dp, vertical = 8.dp)
+        columns = GridCells.Fixed(7)
     ) {
         items(days.size) { index ->
             val date = days[index]

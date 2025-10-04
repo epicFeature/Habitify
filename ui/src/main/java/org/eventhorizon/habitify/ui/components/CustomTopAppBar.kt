@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,8 +42,12 @@ fun CustomTopAppBar(
                 style = topAppBarTextStyle
                 )
         },
-        colors = TopAppBarDefaults.mediumTopAppBarColors(
-            containerColor = AppColor.BgColorLightOrange
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = AppColor.BgColorLightOrange,
+            scrolledContainerColor = Color.Unspecified,
+            navigationIconContentColor = Color.Unspecified,
+            titleContentColor = Color.Unspecified,
+            actionIconContentColor = Color.Unspecified
         ),
         navigationIcon = {
             when {
@@ -54,7 +59,7 @@ fun CustomTopAppBar(
                             .padding(16.dp)
                             .background(
                                 color = AppColor.TopAppBarBackBtnBg,
-                                shape = CircleShape //todo проверить что сдесь лучше юзать
+                                shape = CircleShape //todo проверить что здесь лучше юзать
                             )
                     ) {
                         Icon(

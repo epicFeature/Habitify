@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Singleton
 class OnboardingRepositoryImpl @Inject constructor(
-    private val dataStore: DataStore<Preferences> // Hilt предоставит этот экземпляр из DataStoreModule
+    private val dataStore: DataStore<Preferences>
 ) : OnboardingRepository {
 
     // Создаем ключ, по которому будет храниться наше значение.

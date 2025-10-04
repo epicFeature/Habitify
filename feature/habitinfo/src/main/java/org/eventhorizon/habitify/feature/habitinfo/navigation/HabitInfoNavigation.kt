@@ -10,7 +10,7 @@ import androidx.navigation.navArgument
 import org.eventhorizon.habitify.feature.habitinfo.HabitInfoScreen
 import org.eventhorizon.habitify.navigation.AppScreens
 
-// feature/habitinfo/src/main/java/org/eventhorizon/habitify/feature/habitinfo/navigation/HabitInfoNavigation.kt
+
 @RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.habitInfoScreen(navController: NavHostController) {
     composable(

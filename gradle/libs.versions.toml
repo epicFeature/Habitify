@@ -24,8 +24,6 @@ jetbrainsKotlinJvm = "2.2.0"
 room = "2.8.1"
 loggingInterceptor = "5.1.0"
 pluto = "3.0.1"
-roomsDb = "3.0.1"
-roomsDbNoOp = "3.0.1"
 uiTooling = "1.9.2"
 javaxInject = "1"
 

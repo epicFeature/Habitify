@@ -20,7 +20,6 @@ import org.eventhorizon.habitify.ui.components.theme.Shapes
 @Composable
 fun Calendar(modifier: Modifier = Modifier, viewModel: CalendarViewModel = viewModel()) {
     Column(modifier = modifier.fillMaxWidth().background(AppColor.OnbBgWhite, Shapes.medium).padding(horizontal = 2.dp)) {
-        // Заголовок с навигацией
         CalendarMonthHeader(
             modifier = Modifier.fillMaxWidth(),
             monthTitle = viewModel.getMonthTitle(),
@@ -28,13 +27,9 @@ fun Calendar(modifier: Modifier = Modifier, viewModel: CalendarViewModel = viewM
             onNextMonthClick = { viewModel.navigateToNextMonth() }
         )
         Spacer(Modifier.size(16.dp))
-        // Дни недели
         CalendarDayOfWeekHeader(modifier = Modifier.padding(horizontal = 3.dp))
         Spacer(Modifier.size(8.dp))
-
-        // Сетка дней
         CalendarDaysGrid(Modifier, viewModel)
-
         Spacer(Modifier.size(12.dp))
     }
 }

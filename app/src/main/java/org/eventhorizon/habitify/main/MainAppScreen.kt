@@ -34,21 +34,12 @@ fun MainAppScreen(
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
 
-    /*val navController: NavHostController = rememberNavController()
-    val backStackEntry by navController.currentBackStackEntryAsState()
-    val currentScreen = Routes.valueOf(
-        backStackEntry?.destination?.route ?: Routes.ONBOARDING.name
-    )*/
-    // 1. Получаем состояние из ViewModel. Compose будет следить за его изменениями.
     val startDestinationState by mainViewModel.startDestination.collectAsState()
 
-    // 2. В зависимости от состояния, решаем, что показать: Splash, Onboarding или Main.
     when (val destination = startDestinationState) {
-        // Пока ViewModel определяет маршрут, показываем Splash-экран
         is StartDestination.Loading -> {
             //SplashScreen(modifier = modifier)
         }
-        // Когда маршрут определен (Onboarding или Main), запускаем основной UI
         is StartDestination.Onboarding, is StartDestination.Main -> {
             // Определяем строковый маршрут для NavHost
             val startRoute = if (destination is StartDestination.Onboarding) {
@@ -56,7 +47,6 @@ fun MainAppScreen(
             } else {
                 AppScreens.HOME
             }
-            // Передаем маршрут и колбэк в основной Composable приложения
             HabitifyApp(
                 startDestinationRoute = startRoute,
                 onOnboardingFinished = mainViewModel::onOnboardingFinished,
@@ -67,9 +57,6 @@ fun MainAppScreen(
 }
 
 
-/**
- * Простой Splash-экран, который показывает изображение.
- */
 @Preview
 @Composable
 fun SplashScreen(
@@ -121,14 +108,11 @@ fun HabitifyApp(
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            // 3. Используем динамический стартовый маршрут
             startDestination = startDestinationRoute,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-            // Modifier.verticalScroll был удален, т.к. он мешает скроллингу внутри экранов
         ) {
-            // 4. Передаем колбэк в экран онбординга
             onboardingScreen(
                 navController = navController,
                 onOnboardingFinished = onOnboardingFinished
@@ -139,43 +123,6 @@ fun HabitifyApp(
         }
     }
 }
-
-//            composable(route = Routes.ONBOARDING.name) { //todo тщательно продумать всю навигацию и переделать. Это копипаст почти
-//                OnboardingScreen(
-//                    modifier = Modifier,
-//                    onSkipClick = {
-//                        // viewModel.handleEvent(MainContract.MainUiEvent.OnOnboardingFinished)
-//                        navController.navigate(Routes.HOME.name) {
-//                            popUpTo(navController.graph.findStartDestination().id) {
-//                                saveState = true
-//                            }
-//                            launchSingleTop = true
-//                        }
-//                    })
-//            }
-//            composable(route = Routes.HOME.name) {
-//                HomeScreen(
-//                    modifier = Modifier,
-//                    onPlusClick = {
-//                        navController.navigate(Routes.NEW_HABIT.name) {
-//                            launchSingleTop = true
-//                        }
-//                    },
-//                    onHabitCardClick = {
-//                        navController.navigate(Routes.HABIT_INFO.name) {
-//                            launchSingleTop = true
-//                        }
-//                    }
-//                )
-//            }
-//            composable(route = Routes.HABIT_INFO.name) {
-//                HabitInfoScreen(
-//                    modifier = Modifier
-//                )
-//            }
-//            composable(route = Routes.NEW_HABIT.name) {
-//                NewHabitScreen(modifier = Modifier)
-//            }
 
 /*
 @RequiresApi(Build.VERSION_CODES.O)

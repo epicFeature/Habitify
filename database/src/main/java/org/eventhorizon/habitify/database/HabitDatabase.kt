@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import org.eventhorizon.habitify.database.converters.HabitStatListConverter
+import org.eventhorizon.habitify.database.converters.LocalDateConverter
 import org.eventhorizon.habitify.database.dao.HabitDao
 import org.eventhorizon.habitify.database.entity.HabitDbEntity
 
@@ -11,7 +12,7 @@ import org.eventhorizon.habitify.database.entity.HabitDbEntity
     entities = [HabitDbEntity::class],
     version = 1
 )
-@TypeConverters(HabitStatListConverter::class)
+@TypeConverters(HabitStatListConverter::class, LocalDateConverter::class)
 abstract class HabitDatabase : RoomDatabase() {
 
     abstract fun habitDao(): HabitDao

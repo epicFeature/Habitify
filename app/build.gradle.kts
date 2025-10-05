@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "org.eventhorizon.habitify"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"

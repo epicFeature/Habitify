@@ -6,7 +6,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.google.gson.Gson
 import com.pluto.plugins.logger.PlutoLog
-import com.pluto.plugins.rooms.db.PlutoRoomsDBWatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -84,7 +83,7 @@ object RoomModule {
                     }
                 })
                 // ---> КОНЕЦ <---
-                PlutoRoomsDBWatcher.watch(HabitDatabase.DATABASE_NAME, HabitDatabase::class.java)
+                //PlutoRoomsDBWatcher.watch(HabitDatabase.DATABASE_NAME, HabitDatabase::class.java)
             }
     }
 

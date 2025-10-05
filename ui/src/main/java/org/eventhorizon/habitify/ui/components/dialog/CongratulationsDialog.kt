@@ -39,11 +39,11 @@ import org.eventhorizon.habitify.ui.components.theme.congratsDialogTitleTextStyl
 @Composable
 fun CongratulationsDialog(
     modifier: Modifier = Modifier,
-    onDismiss: () -> Unit,
+    onContinue: () -> Unit,
     onCreateNewHabit: () -> Unit
 ) {
     Dialog(
-        onDismissRequest = onDismiss
+        onDismissRequest = onContinue
     ) {
         Column(
             modifier
@@ -54,7 +54,7 @@ fun CongratulationsDialog(
             verticalArrangement = Arrangement.Top
         ) {
             IconButton(
-                onClick = onDismiss,
+                onClick = onContinue,
                 modifier = Modifier
                     .padding(12.dp)
                     .size(28.dp)
@@ -110,7 +110,7 @@ fun CongratulationsDialog(
             }
             Spacer(Modifier.height(10.dp))
             Button(
-                onClick = onDismiss,
+                onClick = onContinue,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 8.dp),
@@ -136,7 +136,7 @@ fun CongratulationsDialog(
 @Composable
 private fun PreviewOnboardingScreen() {
     CongratulationsDialog(
-        onDismiss = {},
+        onContinue = {},
         onCreateNewHabit = {}
     )
 }

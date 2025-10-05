@@ -1,6 +1,7 @@
 package org.eventhorizon.habitify.feature.home.components.habitschart.body
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -13,21 +14,33 @@ import org.eventhorizon.habitify.ui.components.theme.AppColor
 import org.eventhorizon.habitify.ui.components.theme.Shapes
 
 @Composable
-fun HabitCheckCard(modifier: Modifier = Modifier, color: Color, isChecked: Boolean = false) { //todo передавать динамически цвет
-    if (isChecked){
-        Box(modifier = modifier
-            .size(54.dp)
-            .background(color.copy(0.1F), Shapes.medium)
-        ){
-        Box(modifier = modifier
-            .align(Alignment.Center)
-            .size(50.dp)
-            .background(color, Shapes.medium)
-        )}
+fun HabitCheckCard(
+    modifier: Modifier = Modifier,
+    color: Color,
+    isChecked: Boolean,
+    isClickable: Boolean = false,
+    onClick: () -> Unit = {}
+) {
+    if (isChecked) {
+        Box(
+            modifier = modifier
+                .size(54.dp)
+                .background(color.copy(0.1F), Shapes.medium)
+                .clickable(enabled = isClickable, onClick = onClick)
+        ) {
+            Box(
+                modifier = modifier
+                    .align(Alignment.Center)
+                    .size(50.dp)
+                    .background(color, Shapes.medium)
+            )
+        }
     } else {
-        Box(modifier = modifier
-            .size(54.dp)
-            .background(color.copy(0.1F), Shapes.medium)
+        Box(
+            modifier = modifier
+                .size(54.dp)
+                .background(color.copy(0.1F), Shapes.medium)
+                .clickable(enabled = isClickable, onClick = onClick)
         )
     }
 }
@@ -41,5 +54,8 @@ private fun PreviewHabitCheckedCard() {
 @Preview(showBackground = true)
 @Composable
 private fun PreviewHabitUncheckedCard() {
-    HabitCheckCard(color = AppColor.habitIconColorBlue, isChecked = false)
+    HabitCheckCard(
+        color = AppColor.habitIconColorBlue,
+        isChecked = false
+    )
 }

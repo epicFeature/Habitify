@@ -2,7 +2,6 @@ package org.eventhorizon.habitify.database.converters
 
 import androidx.room.TypeConverter
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 
 /**
@@ -11,7 +10,26 @@ import java.time.format.DateTimeFormatter
  */
 
 class LocalDateConverter {
-    private val formatter = DateTimeFormatter.ISO_LOCAL_DATE
+    /**
+     * Конвертер для преобразования Long в LocalDate.
+     * Room будет вызывать этот метод при чтении данных из базы.
+     */
+    @TypeConverter
+    fun fromTimestamp(value: Long?): LocalDate? {
+        // Преобразуем количество дней с начала эпохи обратно в дату
+        return value?.let { LocalDate.ofEpochDay(it) }
+    }
+
+    /**
+     * Конвертер для преобразования LocalDate в Long.
+     * Room будет вызывать этот метод при записи данных в базу.
+     */
+    @TypeConverter
+    fun dateToTimestamp(date: LocalDate?): Long? {
+        // Преобразуем дату в количество дней с начала эпохи
+        return date?.toEpochDay()
+    }
+/*    private val formatter = DateTimeFormatter.ISO_LOCAL_DATE
 
     @TypeConverter
     fun fromLocalDate(date: LocalDate?): String? {
@@ -23,5 +41,5 @@ class LocalDateConverter {
         return dateString?.let {
             LocalDate.parse(it, formatter)
         }
-    }
+    }*/
 }

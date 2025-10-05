@@ -25,9 +25,9 @@ import org.eventhorizon.habitify.ui.components.theme.homeDateCardDayOfWeekTextSt
 @Composable
 fun DateHomeCard(
     modifier: Modifier = Modifier,
-    dayOfWeekText: String,
-    dateText: String,
-    isToday: Boolean = false
+    dayOfMonth: String,
+    dayOfWeek: String,
+    isToday: Boolean
 ) {
     Box(
         modifier = modifier
@@ -36,17 +36,17 @@ fun DateHomeCard(
             modifier = Modifier
                 .align(Alignment.Center)
                 .background(AppColor.White, Shapes.medium)
-                .size(50.dp)
+                .size(54.dp)
                 .wrapContentSize()
         ) {
             Text(
-                text = dayOfWeekText.uppercase(),
+                text = dayOfWeek.uppercase(),
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 textAlign = TextAlign.Center,
                 style = homeDateCardDayOfWeekTextStyle
             )
             Text(
-                    text = dateText,
+                    text = dayOfMonth,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     textAlign = TextAlign.Center,
                     style = homeDateCardDateTextStyle
@@ -71,8 +71,8 @@ fun DateHomeCard(
 private fun PreviewDateHomeCard() {
     DateHomeCard(
         modifier = Modifier,
-        dayOfWeekText = "Mon",
-        dateText = "15",
+        dayOfWeek = "Mon",
+        dayOfMonth = "15",
         isToday = true
     )
 }

@@ -12,6 +12,7 @@ fun HabitDbEntity.toDomain(): Habit {
         id = this.id,
         name = this.name,
         color = this.color,
+        initialDaysToFinish = this.initialDaysToFinish,
         daysToFinish = this.daysToFinish,
         statistics = this.statistics.map {it.toDomain()}
     )
@@ -30,6 +31,7 @@ fun Habit.toEntity(): HabitDbEntity {
         id = this.id,
         name = this.name,
         color = this.color,
+        initialDaysToFinish = this.initialDaysToFinish,
         daysToFinish = this.daysToFinish,
         statistics = this.statistics.map { it.toEntity() }
     )

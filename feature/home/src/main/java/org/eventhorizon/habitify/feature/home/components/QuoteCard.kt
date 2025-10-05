@@ -23,7 +23,7 @@ import org.eventhorizon.habitify.ui.components.theme.homeQuoteAuthorTextStyle
 import org.eventhorizon.habitify.ui.components.theme.homeQuoteTextStyle
 
 @Composable
-fun QuoteCard(modifier: Modifier = Modifier, quoteText: String, quoteAuthor: String) {
+fun QuoteCard(modifier: Modifier = Modifier, quoteText: String, quoteAuthor: String, isLoading: Boolean = false) {
     Row(
         modifier = modifier
             .background(AppColor.White, Shapes.medium)
@@ -32,7 +32,7 @@ fun QuoteCard(modifier: Modifier = Modifier, quoteText: String, quoteAuthor: Str
         Column(
             modifier = Modifier
                 .padding(start = 18.dp, top = 18.dp, bottom = 18.dp, end = 18.dp)
-                .wrapContentSize()
+                .weight(3F)
         ) {
             Text(
                 text = quoteText,
@@ -53,6 +53,8 @@ fun QuoteCard(modifier: Modifier = Modifier, quoteText: String, quoteAuthor: Str
             contentDescription = null,
             modifier = Modifier
                 .size(140.dp)
+                .weight(1F)
+                .padding(end = 10.dp)
         )
     }
 }

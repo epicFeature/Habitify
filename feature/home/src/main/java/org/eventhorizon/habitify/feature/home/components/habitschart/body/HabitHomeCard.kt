@@ -1,6 +1,7 @@
 package org.eventhorizon.habitify.feature.home.components.habitschart.body
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -12,28 +13,34 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.eventhorizon.habitify.feature.home.HomeContract
 import org.eventhorizon.habitify.ui.components.theme.AppColor
 import org.eventhorizon.habitify.ui.components.theme.Shapes
 import org.eventhorizon.habitify.ui.components.theme.homeChartHabitTitleTextStyle
+import java.time.LocalDate
 
 @Composable
 fun HabitHomeCard(
     modifier: Modifier = Modifier,
-    onClick: (String) -> Unit,
-    habitName: String, /*habitTrackingDataHome: HabitTrackingDataHome*/
+    habit: HomeContract.HomeUiState.State.HabitForChart,
+    onCardClick: (Int) -> Unit,
+    onCheckClick: (Int, LocalDate, Boolean) -> Unit
 ) { //todo пока хардкод потом заменить
     Row(
         modifier = modifier
             .background(AppColor.White, Shapes.medium)
             .wrapContentHeight()
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable(onClick = { onCardClick(habit.id) }),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = habitName.uppercase(),
+            text = habit.name.uppercase(),
             modifier = Modifier
                 .padding(18.dp)
                 .width(84.dp)
@@ -50,7 +57,11 @@ fun HabitHomeCard(
             modifier = Modifier
                 .padding(vertical = 8.dp)
                 .align(Alignment.CenterVertically),
-            color = AppColor.habitIconColorPurple
+            color = Color(habit.color),
+            checks = habit.checks,
+            onCheckClick = { date, isChecked ->
+                onCheckClick(habit.id, date, isChecked)
+            }
         )
     }
 }
@@ -58,6 +69,22 @@ fun HabitHomeCard(
 @Preview(showBackground = true, widthDp = 500)
 @Composable
 private fun PreviewHabitHomeCard() {
-    HabitHomeCard(onClick = {}, habitName = "Early Wake Ups")
-}
+    val today = LocalDate.now()
+    val previewHabit = HomeContract.HomeUiState.State.HabitForChart(
+        id = 2,
+        name = "Читать 30 мин",
+        color = AppColor.habitIconColorYellow.toArgb(),
+        checks = (0..4L).map {
+            HomeContract.HomeUiState.State.HabitCheck(
+                today.minusDays(4 - it),
+                isChecked = (it % 2).toInt() != 0,
+                isClickable = it == 4L)
+        }
+    )
 
+    HabitHomeCard(
+        habit = previewHabit,
+        onCardClick = {},
+        onCheckClick = { _, _, _ -> }
+    )
+}

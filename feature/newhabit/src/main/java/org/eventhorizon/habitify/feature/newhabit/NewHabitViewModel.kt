@@ -1,7 +1,5 @@
 package org.eventhorizon.habitify.feature.newhabit
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -38,21 +36,18 @@ class NewHabitViewModel @Inject constructor(
     )
     private var colorIndex = 0
 
-    init{
+   init{
         // Начальная инициализация состояния
         setState()
     }
 
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
     fun handleEvent(event: NewHabitContract.NewHabitUiEvent) {
         when (event) {
             is NewHabitContract.NewHabitUiEvent.OnHabitNameChanged -> onHabitNameChanged(event.name)
             is NewHabitContract.NewHabitUiEvent.OnDurationChanged -> onDurationChanged(event.days)
             is NewHabitContract.NewHabitUiEvent.OnDoneClick -> onDoneClick()
             is NewHabitContract.NewHabitUiEvent.OnDeleteClick -> onDeleteClick()
-            NewHabitContract.NewHabitUiEvent.OnSetState -> setState()
+            NewHabitContract.NewHabitUiEvent.ResetAndPrepareState -> setState()
         }
 
     }
@@ -92,7 +87,6 @@ class NewHabitViewModel @Inject constructor(
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun onDoneClick() {
         viewModelScope.launch {
             val habitToSave = _state.value.habit.toDomain()
@@ -110,8 +104,7 @@ class NewHabitViewModel @Inject constructor(
     }
 
     private fun getNextColor(): Color {
-        val color = colorCycle[colorIndex]
-        colorIndex = (colorIndex + 1) % colorCycle.size
+        val color = colorCycle.shuffled().first()
         return color
     }
 }

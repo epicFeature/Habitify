@@ -34,7 +34,7 @@ fun NewHabitScreen(
     val state by viewModel.state.collectAsState()
 
     LaunchedEffect(Unit) {
-        viewModel.handleEvent(NewHabitContract.NewHabitUiEvent.OnSetState)
+        viewModel.handleEvent(NewHabitContract.NewHabitUiEvent.ResetAndPrepareState)
     }
 
     // 2. Слушаем одноразовые эффекты (например, для навигации)

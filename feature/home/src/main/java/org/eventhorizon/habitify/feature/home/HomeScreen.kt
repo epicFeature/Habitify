@@ -79,7 +79,7 @@ fun HomeScreen(
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
-        ) { //todo добавить вертикальную скролируемость
+        ) {
             QuoteCard(
                 modifier = Modifier.padding(20.dp),
                 quoteText = uiState.quoteText,

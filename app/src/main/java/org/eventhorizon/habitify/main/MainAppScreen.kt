@@ -40,12 +40,13 @@ fun MainAppScreen(
         is StartDestination.Loading -> {
             //SplashScreen(modifier = modifier)
         }
+
         is StartDestination.Onboarding, is StartDestination.Main -> {
             // Определяем строковый маршрут для NavHost
             val startRoute = if (destination is StartDestination.Onboarding) {
-                AppScreens.ONBOARDING
+                AppScreens.Onboarding.ROUTE
             } else {
-                AppScreens.HOME
+                AppScreens.Home.ROUTE_DEFINITION
             }
             HabitifyApp(
                 startDestinationRoute = startRoute,
@@ -63,9 +64,11 @@ fun SplashScreen(
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = modifier.fillMaxSize().background(AppColor.White),
+        modifier = modifier
+            .fillMaxSize()
+            .background(AppColor.White),
         contentAlignment = Alignment.Center
-    ){}
+    ) {}
 }
 
 
@@ -86,10 +89,10 @@ fun HabitifyApp(
 
     Scaffold(
         topBar = {
-            if (currentRoute != AppScreens.ONBOARDING) {
+            if (currentRoute != AppScreens.Onboarding.ROUTE) {
                 val title = when (currentRoute) {
-                    AppScreens.HOME -> "Home"
-                    AppScreens.NEW_HABIT -> "New Habit"
+                    AppScreens.Home.ROUTE_DEFINITION -> "Home"
+                    AppScreens.NewHabit.ROUTE -> "New Habit"
                     AppScreens.HabitInfo.ROUTE_DEFINITION -> "Habit info"
                     else -> "Habitify"
                 }
@@ -99,7 +102,7 @@ fun HabitifyApp(
                 )
             }
         },
-        containerColor = if (currentRoute != AppScreens.ONBOARDING) {
+        containerColor = if (currentRoute != AppScreens.Onboarding.ROUTE) {
             AppColor.BgColorLightOrange
         } else {
             AppColor.White
@@ -111,15 +114,43 @@ fun HabitifyApp(
             startDestination = startDestinationRoute,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
+                .padding(innerPadding),
         ) {
             onboardingScreen(
-                navController = navController,
                 onOnboardingFinished = onOnboardingFinished
             )
-            habitInfoScreen(navController)
-            newHabitScreen(navController)
-            homeScreen(navController)
+            habitInfoScreen(
+                Modifier,
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+                onNavigateBackWithCompletion = {
+                    navController.popBackStack()
+                    // Вызываем безопасную функцию-конструктор
+                    navController.navigate(AppScreens.Home.destinationWithCongrats(true)) {
+                        popUpTo(navController.graph.startDestinationId) {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
+                }
+            )
+            newHabitScreen(
+                onNavigateHome = {
+                    navController.navigate(AppScreens.Home.destination()) {
+                        popUpTo(navController.graph.startDestinationId) {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
+                }
+            )
+            homeScreen(
+                onOpenHabitInfoClick = { habitId ->
+                    navController.navigate(AppScreens.HabitInfo.destination(habitId))
+                },
+                onOpenNewHabitScreenClick = { navController.navigate(AppScreens.NewHabit.ROUTE) }
+            )
         }
     }
 }

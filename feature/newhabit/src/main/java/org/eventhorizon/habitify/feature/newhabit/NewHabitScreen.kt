@@ -28,13 +28,13 @@ import org.eventhorizon.habitify.ui.components.theme.AppColor
 @Composable
 fun NewHabitScreen(
     modifier: Modifier,
-    onGoToHomeScreenClick: () -> Unit,
+    onNavigateHome: () -> Unit,
     viewModel: NewHabitViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
 
-    LaunchedEffect(key1 = true) {
-        viewModel.resetState()
+    LaunchedEffect(Unit) {
+        viewModel.handleEvent(NewHabitContract.NewHabitUiEvent.OnSetState)
     }
 
     // 2. Слушаем одноразовые эффекты (например, для навигации)
@@ -42,7 +42,7 @@ fun NewHabitScreen(
         viewModel.effect.collect { effect ->
             when (effect) {
                 // Если пришел эффект "NavigateToHome", вызываем колбэк
-                NewHabitContract.NewHabitEffect.NavigateToHome -> onGoToHomeScreenClick()
+                NewHabitContract.NewHabitEffect.NavigateToHome -> onNavigateHome()
             }
         }
     }
@@ -83,6 +83,6 @@ private fun PreviewNewHabitScreen() {
     NewHabitScreen(
         modifier = Modifier
             .background(AppColor.BgColorLightOrange),
-        onGoToHomeScreenClick = {}
+        onNavigateHome = {}
     )
 }

@@ -11,13 +11,20 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import org.eventhorizon.habitify.feature.habitinfo.components.HabitInfoTopCard
 import org.eventhorizon.habitify.feature.habitinfo.components.calendar.Calendar
 import org.eventhorizon.habitify.ui.components.theme.AppColor
@@ -29,22 +36,47 @@ import org.eventhorizon.habitify.ui.components.theme.congratsDialogBtnTextStyle
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun HabitInfoScreen(modifier: Modifier = Modifier, habitId: String) {
-    Column(
+fun HabitInfoScreen(
+    modifier: Modifier = Modifier,
+    onNavigateBack: ()-> Unit,
+    onNavigateBackWithCompletion: () -> Unit,
+    viewModel: HabitInfoViewModel = hiltViewModel()
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
+    // Слушаем эффекты для навигации
+    LaunchedEffect(key1 = Unit) {
+        viewModel.effect.collect { effect ->
+            when (effect) {
+                HabitInfoContract.HabitInfoEffect.NavigateBackToHome -> onNavigateBack()
+                is HabitInfoContract.HabitInfoEffect.NavigateBackWithCompletion -> onNavigateBackWithCompletion()
+            }
+        }
+    }
+
+    Column( //todo добавить скролируемость
         modifier = modifier
             .padding(horizontal = 20.dp)
             .fillMaxSize()
             .background(AppColor.BgColorLightOrange)
+            .verticalScroll(rememberScrollState())
     ) {
         Spacer(Modifier.size(16.dp))
-        HabitInfoTopCard()
+        HabitInfoTopCard(
+            habitName = state.habitName,
+            daysLeft = state.daysLeft,
+            habitColor = state.habitColor
+        )
         Spacer(Modifier.size(16.dp))
-        Calendar()
+        Calendar(
+            markedDates = state.markedDates,
+            habitColor = state.habitColor
+        )
         Spacer(Modifier.size(36.dp))
         //HabitInfoStatistics()
         //Spacer(Modifier.size(16.dp))
         Button(
-            onClick = { }, //todo onClick
+            onClick = { viewModel.setEvent(HabitInfoContract.HabitInfoEvent.OnCompleteClick) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 8.dp),
@@ -64,7 +96,7 @@ fun HabitInfoScreen(modifier: Modifier = Modifier, habitId: String) {
         }
         Spacer(Modifier.height(10.dp))
         Button(
-            onClick = {}, //todo onCLick
+            onClick = {viewModel.setEvent(HabitInfoContract.HabitInfoEvent.OnDeleteClick)},
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 8.dp),
@@ -82,6 +114,7 @@ fun HabitInfoScreen(modifier: Modifier = Modifier, habitId: String) {
                 style = congratsDialogBtnTextStyle
             )
         }
+        Spacer(Modifier.height(40.dp)) // Отступ снизу
     }
 }
 
@@ -92,6 +125,8 @@ private fun PreviewHabitInfoScreen() {
     HabitInfoScreen(
         modifier = Modifier
             .background(AppColor.BgColorLightOrange),
-        habitId = ""
+        onNavigateBack = {},
+        onNavigateBackWithCompletion = {},
+        viewModel = viewModel(),
     )
 }

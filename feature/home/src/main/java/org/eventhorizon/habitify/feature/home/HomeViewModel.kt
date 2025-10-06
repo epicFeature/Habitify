@@ -63,6 +63,9 @@ class HomeViewModel @Inject constructor(
                 _uiState.update { it.copy(showCongratulationsDialog = false) }
                 onAddHabitClicked() // Используем уже существующую логику навигации
             }
+            HomeContract.HomeUiEvent.OnShowCongratsDialog -> {
+                _uiState.update { it.copy(showCongratulationsDialog = true) }
+            }
         }
     }
 

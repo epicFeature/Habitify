@@ -23,6 +23,7 @@ fun HabitNameTextField(
     TextField(
         value = habitName,
         onValueChange = onHabitNameChanged,
+        singleLine = true,
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight(),

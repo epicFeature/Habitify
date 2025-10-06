@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,7 +25,12 @@ import org.eventhorizon.habitify.ui.components.theme.habitInfoTopCardSubtitleTex
 import org.eventhorizon.habitify.ui.components.theme.habitInfoTopCardTitleTextStyle
 
 @Composable
-fun HabitInfoTopCard(modifier: Modifier = Modifier) {
+fun HabitInfoTopCard(
+    modifier: Modifier = Modifier,
+    habitName: String,
+    daysLeft: Int,
+    habitColor: Color
+) {
     Row(
         modifier = modifier
             .background(AppColor.White, Shapes.medium)
@@ -36,7 +42,7 @@ fun HabitInfoTopCard(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .size(50.dp)
                 .align(Alignment.CenterVertically),
-            color = AppColor.habitIconColorYellow,
+            color = habitColor,
             isChecked = true
         )
         Spacer(Modifier.size(16.dp))
@@ -45,14 +51,14 @@ fun HabitInfoTopCard(modifier: Modifier = Modifier) {
                 .wrapContentSize()
         ) {
             Text(
-                text = "Sleep early",
+                text = habitName,
                 modifier = Modifier,
                 textAlign = TextAlign.Start,
                 style = habitInfoTopCardTitleTextStyle
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                text = "You need 7 more days", //todo сделать динамичным
+                text = "Осталось ещё $daysLeft дней",
                 modifier = Modifier,
                 textAlign = TextAlign.Start,
                 style = habitInfoTopCardSubtitleTextStyle
@@ -66,6 +72,9 @@ fun HabitInfoTopCard(modifier: Modifier = Modifier) {
 @Composable
 private fun PreviewHabitInfoTopCard() {
     HabitInfoTopCard(
-        modifier = Modifier.background(AppColor.BgColorLightOrange)
+        modifier = Modifier.background(AppColor.BgColorLightOrange),
+        habitName = "Sleep early",
+        daysLeft = 6,
+        habitColor = AppColor.habitIconColorYellow
     )
 }

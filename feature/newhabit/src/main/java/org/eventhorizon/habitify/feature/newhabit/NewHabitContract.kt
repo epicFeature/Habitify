@@ -8,6 +8,7 @@ interface NewHabitContract {
         data class OnDurationChanged(val days: Int) : NewHabitUiEvent
         object OnDoneClick: NewHabitUiEvent
         object OnDeleteClick: NewHabitUiEvent
+        object OnSetState: NewHabitUiEvent
     }
 
     sealed interface NewHabitUiState {

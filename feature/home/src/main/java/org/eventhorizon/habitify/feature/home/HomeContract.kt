@@ -14,6 +14,8 @@ interface HomeContract {
         // Пользователь нажал на кнопку "Добавить привычку"
         data object OnAddHabitClick : HomeUiEvent
 
+        data object OnShowCongratsDialog : HomeUiEvent
+
         object OnCongratulationsDialogContinue : HomeUiEvent
         object OnCongratulationsDialogCreateNew : HomeUiEvent
     }

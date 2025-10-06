@@ -31,12 +31,20 @@ import org.eventhorizon.habitify.ui.components.theme.AppColor
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
+    showCongratsDialogOnStart: Boolean = false,
     onOpenNewHabitScreenClick: () -> Unit, //add new habit
     onOpenHabitInfoClick: (habitId: String) -> Unit,
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     // Подписываемся на состояние и эффекты
     val uiState by homeViewModel.uiState.collectAsStateWithLifecycle()
+
+    // 2. При первом запуске экрана сообщаем ViewModel, нужно ли показать диалог
+    LaunchedEffect(Unit) {
+        if (showCongratsDialogOnStart) {
+            homeViewModel.setEvent(HomeContract.HomeUiEvent.OnShowCongratsDialog)
+        }
+    }
 
     LaunchedEffect(Unit) {
         homeViewModel.effect.collect { effect ->
@@ -68,7 +76,10 @@ fun HomeScreen(
             ),
             contentDescription = null
         )
-        Column(modifier = Modifier.verticalScroll(rememberScrollState())) { //todo добавить вертикальную скролируемость
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+        ) { //todo добавить вертикальную скролируемость
             QuoteCard(
                 modifier = Modifier.padding(20.dp),
                 quoteText = uiState.quoteText,

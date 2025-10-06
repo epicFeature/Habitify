@@ -40,10 +40,24 @@ class NewHabitViewModel @Inject constructor(
 
     init{
         // Начальная инициализация состояния
-        resetState()
+        setState()
     }
 
-    fun resetState(){
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun handleEvent(event: NewHabitContract.NewHabitUiEvent) {
+        when (event) {
+            is NewHabitContract.NewHabitUiEvent.OnHabitNameChanged -> onHabitNameChanged(event.name)
+            is NewHabitContract.NewHabitUiEvent.OnDurationChanged -> onDurationChanged(event.days)
+            is NewHabitContract.NewHabitUiEvent.OnDoneClick -> onDoneClick()
+            is NewHabitContract.NewHabitUiEvent.OnDeleteClick -> onDeleteClick()
+            NewHabitContract.NewHabitUiEvent.OnSetState -> setState()
+        }
+
+    }
+
+    private fun setState(){
         val appearanceDays = MutableList(7) { it < 5 }.apply {shuffle(Random) }
         _state.update {
             it.copy(
@@ -53,17 +67,6 @@ class NewHabitViewModel @Inject constructor(
                 isDoneButtonEnabled = false
             )
         }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun handleEvent(event: NewHabitContract.NewHabitUiEvent) {
-        when (event) {
-            is NewHabitContract.NewHabitUiEvent.OnHabitNameChanged -> onHabitNameChanged(event.name)
-            is NewHabitContract.NewHabitUiEvent.OnDurationChanged -> onDurationChanged(event.days)
-            is NewHabitContract.NewHabitUiEvent.OnDoneClick -> onDoneClick()
-            is NewHabitContract.NewHabitUiEvent.OnDeleteClick -> onDeleteClick()
-        }
-
     }
 
     private fun onHabitNameChanged(name: String) {

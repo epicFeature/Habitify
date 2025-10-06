@@ -61,7 +61,7 @@ fun CongratulationsDialog(
                     .align(Alignment.End)
                     .background(
                         color = AppColor.TopAppBarBackBtnBg,
-                        shape = CircleShape //todo проверить что сдесь лучше юзать
+                        shape = CircleShape
                     )
             ) {
                 Icon(
@@ -76,14 +76,14 @@ fun CongratulationsDialog(
                     .fillMaxWidth()
             )
             Text(
-                text = "CONGRATULATIONS!",
+                text = "Поздравляем!".uppercase(),
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
                 style = congratsDialogTitleTextStyle
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                text = "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris",
+                text = "Вы на шаг ближе к своей цели. Так держать!",
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
                 style = congratsDialogSubtitleTextStyle
@@ -104,7 +104,7 @@ fun CongratulationsDialog(
                 )
             ) {
                 Text(
-                    text = "Create New Habit",
+                    text = "Создать новую привычку",
                     style = congratsDialogBtnTextStyle
                 )
             }
@@ -124,7 +124,7 @@ fun CongratulationsDialog(
                 )
             ) {
                 Text(
-                    text = "Continue",
+                    text = "Продолжить",
                     style = congratsDialogBtnTextStyle
                 )
             }

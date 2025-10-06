@@ -51,7 +51,7 @@ fun HabitInfoTopCard(
                 .wrapContentSize()
         ) {
             Text(
-                text = habitName,
+                text = habitName.uppercase(),
                 modifier = Modifier,
                 textAlign = TextAlign.Start,
                 style = habitInfoTopCardTitleTextStyle

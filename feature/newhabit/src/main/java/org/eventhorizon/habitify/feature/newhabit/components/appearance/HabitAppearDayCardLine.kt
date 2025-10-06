@@ -16,24 +16,23 @@ import org.eventhorizon.habitify.ui.components.theme.AppColor
 fun HabitAppearDayCardLine(
     modifier: Modifier,
     appearanceDays: List<Boolean>,
-    color: Color = AppColor.habitIconColorYellow) {
-    Row(modifier = modifier //todo в очереди на оптимизацию
-        .background(AppColor.BgColorLightOrange),
+    color: Color = AppColor.habitIconColorYellow
+) {
+    val days = listOf("Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс")
+    Row(
+        modifier = modifier
+            .background(AppColor.BgColorLightOrange),
         horizontalArrangement = Arrangement.Center
     ) {
-        HabitAppearDayCard(modifier = Modifier.background(AppColor.White), isChecked = appearanceDays[0], "MON", color = color)
-        Spacer(Modifier.size(1.dp))
-        HabitAppearDayCard(modifier = Modifier.background(AppColor.White), isChecked = appearanceDays[1], "TUE", color = color)
-        Spacer(Modifier.size(1.dp))
-        HabitAppearDayCard(modifier = Modifier.background(AppColor.White), isChecked = appearanceDays[2], "WED", color = color)
-        Spacer(Modifier.size(1.dp))
-        HabitAppearDayCard(modifier = Modifier.background(AppColor.White), isChecked = appearanceDays[3], "THU", color = color)
-        Spacer(Modifier.size(1.dp))
-        HabitAppearDayCard(modifier = Modifier.background(AppColor.White), isChecked = appearanceDays[4], "FRI", color = color)
-        Spacer(Modifier.size(1.dp))
-        HabitAppearDayCard(modifier = Modifier.background(AppColor.White), isChecked = appearanceDays[5], "SUT", color = color)
-        Spacer(Modifier.size(1.dp))
-        HabitAppearDayCard(modifier = Modifier.background(AppColor.White), isChecked = appearanceDays[6], "SUN", color = color)
+        days.forEachIndexed { index, day ->
+            HabitAppearDayCard(
+                modifier = Modifier.background(AppColor.White),
+                isChecked = appearanceDays[0],
+                day,
+                color = color
+            )
+            if (index != days.lastIndex) Spacer(Modifier.size(1.dp))
+        }
     }
 }
 

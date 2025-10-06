@@ -64,10 +64,10 @@ fun HabitifyApp(
         topBar = {
             if (currentRoute != AppScreens.Onboarding.ROUTE) {
                 val title = when (currentRoute) {
-                    AppScreens.Home.ROUTE_DEFINITION -> "Home"
-                    AppScreens.NewHabit.ROUTE -> "New Habit"
-                    AppScreens.HabitInfo.ROUTE_DEFINITION -> "Habit info"
-                    else -> "Habitify"
+                    AppScreens.Home.ROUTE_DEFINITION -> "Мои привычки"
+                    AppScreens.NewHabit.ROUTE -> "Новая привычка"
+                    AppScreens.HabitInfo.ROUTE_DEFINITION -> "Детали привычки"
+                    else -> ""
                 }
                 CustomTopAppBar(
                     title = title,

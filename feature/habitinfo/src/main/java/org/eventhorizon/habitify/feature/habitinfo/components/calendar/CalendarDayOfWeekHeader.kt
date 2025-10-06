@@ -18,7 +18,7 @@ import org.eventhorizon.habitify.ui.components.theme.calendarDayOfWeekTextStyle
 
 @Composable
 fun CalendarDayOfWeekHeader(modifier: Modifier = Modifier) {
-    val days = listOf("MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN")
+    val days = listOf("Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс")
     Row(modifier = modifier.fillMaxWidth()) {
         days.forEachIndexed { index, day ->
             Text(

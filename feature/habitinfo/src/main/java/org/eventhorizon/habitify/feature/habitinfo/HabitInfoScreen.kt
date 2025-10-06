@@ -86,7 +86,7 @@ fun HabitInfoScreen(
             )
         ) {
             Text(
-                text = "Complete",
+                text = "Завершить привычку",
                 style = congratsDialogBtnTextStyle
             )
         }
@@ -106,7 +106,7 @@ fun HabitInfoScreen(
             )
         ) {
             Text(
-                text = "Delete",
+                text = "Удалить привычку",
                 style = congratsDialogBtnTextStyle
             )
         }

@@ -37,13 +37,13 @@ fun OnbPagerIndicator(modifier: Modifier, pagerState: PagerState, size: Dp = 12.
                     modifier = Modifier.padding(4.dp).size(glowSize),
                     contentAlignment = Center
                 ) {
-                    // Ореол
+                    // внешний круг
                     Box(
                         modifier = Modifier
                             .size(glowSize)
                             .background(AppColor.OnbDotPurpleShadow, CircleShape)
                     )
-                    // Основной круг
+                    // внутренний
                     Box(
                         modifier = Modifier
                             .size(purpleCircleSize)

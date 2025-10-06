@@ -21,7 +21,7 @@ import java.time.LocalDate
 fun HabitHomeChart(
     modifier: Modifier = Modifier,
     chartDays: List<HomeContract.HomeUiState.State.ChartDay>,
-    habits: List<HomeContract.HomeUiState.State.HabitForChart>, //todo не очень корректно
+    habits: List<HomeContract.HomeUiState.State.HabitForChart>, //todo вынести класс за пределы state для ui
     onHabitCardClick: (Int) -> Unit,
     onHabitCheckClick: (Int, LocalDate, Boolean) -> Unit
 ) {
@@ -67,7 +67,8 @@ private fun PreviewHabitHomeChart() {
                 HomeContract.HomeUiState.State.HabitCheck(
                     today.minusDays(4 - it),
                     isChecked = (it % 2).toInt() != 0,
-                    isClickable = it == 4L)
+                    isClickable = it == 4L
+                )
             }
         ),
         HomeContract.HomeUiState.State.HabitForChart(
@@ -78,7 +79,8 @@ private fun PreviewHabitHomeChart() {
                 HomeContract.HomeUiState.State.HabitCheck(
                     today.minusDays(4 - it),
                     isChecked = true,
-                    isClickable = it == 4L)
+                    isClickable = it == 4L
+                )
             }
         )
     )
@@ -113,7 +115,7 @@ private fun PreviewHabitHomeChart() {
             ),
         ),
         habits = previewHabits,
-        onHabitCardClick = {1},
+        onHabitCardClick = { 1 },
         onHabitCheckClick = { i: Int, date: LocalDate, bool: Boolean -> }
     )
 }

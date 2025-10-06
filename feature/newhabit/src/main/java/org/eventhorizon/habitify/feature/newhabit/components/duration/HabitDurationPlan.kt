@@ -31,8 +31,7 @@ fun HabitDurationPlan(
     val days = listOf(1, 3, 5, 7, 10)
     var sliderPosition by remember { mutableFloatStateOf(0f) }
 
-    // Рассчитываем текущее количество дней на основе позиции слайдера
-    val currentDays = days[sliderPosition.roundToInt()]
+    val currentDays = days[sliderPosition.roundToInt()] // текущее кол-во дней от деления слайдера
 
     Column(modifier = modifier.fillMaxWidth().background(AppColor.White, Shapes.medium).padding(18.dp)) {
         Text(
@@ -48,7 +47,7 @@ fun HabitDurationPlan(
                 onDaysSelected(days[newValue.roundToInt()])
             },
             valueRange = 0f..(days.size - 1).toFloat(),
-            steps = days.size - 2, // Создаем фиксированные позиции
+            steps = days.size - 2, // создаем фиксированный шаг в 2 дня
             modifier = Modifier.fillMaxWidth(),
             colors = SliderColors(
                 thumbColor = color,

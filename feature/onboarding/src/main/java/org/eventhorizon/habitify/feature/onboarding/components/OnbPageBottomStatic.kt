@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,9 +26,9 @@ import org.eventhorizon.habitify.feature.onboarding.components.OnbPagerIndicator
 import org.eventhorizon.habitify.ui.components.theme.AppColor
 import org.eventhorizon.habitify.ui.components.theme.AppColor.DarkPurple
 import org.eventhorizon.habitify.ui.components.theme.AppColor.OnbBtnDisablePurpleText
-import org.eventhorizon.habitify.ui.components.theme.AppColor.OnbBtnDisabledOrange
 import org.eventhorizon.habitify.ui.components.theme.AppColor.OnbBtnOrange
 import org.eventhorizon.habitify.ui.components.theme.Shapes
+import org.eventhorizon.habitify.ui.components.theme.congratsDialogBtnTextStyle
 import org.eventhorizon.habitify.ui.components.theme.onbSkipNextTextStyle
 import org.eventhorizon.habitify.ui.components.theme.onbSubtitleTextStyle
 
@@ -40,7 +39,6 @@ fun OnbPageBottomStatic(
     onNextClick: () -> Unit,
     pagerState: PagerState
 ) {
-    //Мы поможем тебе стать лучшей версией себя
     val colorfulSubtitleText = buildAnnotatedString {
         pushStyle(SpanStyle(color = AppColor.DarkPurple))
         append("Мы ")
@@ -48,7 +46,7 @@ fun OnbPageBottomStatic(
         pushStyle(SpanStyle(color = AppColor.OnbTextOrange))
         append("поможем тебе ")
 
-        pop() // Возврат к предыдущему стилю
+        pop() // возврат к предыдущему стилю
         append("стать лучшей версией ")
 
         pushStyle(SpanStyle(color = AppColor.OnbTextOrange))
@@ -103,27 +101,34 @@ fun OnbPageBottomStatic(
                 onClick = onSkipClick,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 32.dp),
-                contentPadding = PaddingValues(vertical = 12.dp),
+                    .padding(horizontal = 8.dp),
+                contentPadding = PaddingValues(vertical = 22.dp),
                 shape = Shapes.small,
                 colors = ButtonColors(
                     contentColor = DarkPurple,
                     containerColor = OnbBtnOrange,
                     disabledContentColor = OnbBtnDisablePurpleText,
-                    disabledContainerColor = OnbBtnDisabledOrange
-                ),
-                elevation = ButtonDefaults.elevatedButtonElevation(
-                    defaultElevation = 4.dp
+                    disabledContainerColor = OnbBtnOrange
                 ),
             ) {
                 Text(
                     text = stringResource(R.string.onb_screen_get_start),
-                    style = onbSkipNextTextStyle
+                    style = congratsDialogBtnTextStyle
                 )
             }
         }
         Spacer(Modifier.height(36.dp))
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun PreviewOnbPageBottomStaticLastPage() {
+    OnbPageBottomStatic(
+        modifier = Modifier,
+        onSkipClick = {},
+        onNextClick = {},
+        pagerState = PagerState(currentPage = 2, pageCount = {3}))
 }
 
 @Preview(showBackground = true)

@@ -1,20 +1,16 @@
 package org.eventhorizon.habitify.main
 
-import android.os.Build
 import android.ruvpn.ui.common.components.CustomTopAppBar
-import androidx.annotation.RequiresApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -27,22 +23,19 @@ import org.eventhorizon.habitify.navigation.AppScreens
 import org.eventhorizon.habitify.ui.components.theme.AppColor
 
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainAppScreen(
     modifier: Modifier = Modifier,
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
-
     val startDestinationState by mainViewModel.startDestination.collectAsState()
 
-    when (val destination = startDestinationState) {
+    when (val destination = startDestinationState) { //определение стартовой точки
         is StartDestination.Loading -> {
-            //SplashScreen(modifier = modifier)
+            //todo в будущем реализовать плавный SplashScreen
         }
 
         is StartDestination.Onboarding, is StartDestination.Main -> {
-            // Определяем строковый маршрут для NavHost
             val startRoute = if (destination is StartDestination.Onboarding) {
                 AppScreens.Onboarding.ROUTE
             } else {
@@ -57,26 +50,6 @@ fun MainAppScreen(
     }
 }
 
-
-@Preview
-@Composable
-fun SplashScreen(
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(AppColor.White),
-        contentAlignment = Alignment.Center
-    ) {}
-}
-
-
-/**
- * Основной Composable, содержащий Scaffold и NavHost.
- * Он не зависит от ViewModel и получает все необходимое через параметры.
- */
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HabitifyApp(
     startDestinationRoute: String,
@@ -126,7 +99,6 @@ fun HabitifyApp(
                 },
                 onNavigateBackWithCompletion = {
                     navController.popBackStack()
-                    // Вызываем безопасную функцию-конструктор
                     navController.navigate(AppScreens.Home.destinationWithCongrats(true)) {
                         popUpTo(navController.graph.startDestinationId) {
                             inclusive = true
@@ -155,12 +127,12 @@ fun HabitifyApp(
     }
 }
 
-/*
-@RequiresApi(Build.VERSION_CODES.O)
+
 @Preview(showBackground = true)
 @Composable
 fun PreviewMainScreen() {
     MainAppScreen(
-        modifier = Modifier
+        modifier = Modifier,
+        mainViewModel = viewModel()
     )
-}*/
+}

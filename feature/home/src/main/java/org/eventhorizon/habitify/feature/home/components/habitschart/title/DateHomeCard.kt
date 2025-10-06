@@ -46,10 +46,10 @@ fun DateHomeCard(
                 style = homeDateCardDayOfWeekTextStyle
             )
             Text(
-                    text = dayOfMonth,
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                    textAlign = TextAlign.Center,
-                    style = homeDateCardDateTextStyle
+                text = dayOfMonth,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                textAlign = TextAlign.Center,
+                style = homeDateCardDateTextStyle
             )
         }
         if (isToday) {

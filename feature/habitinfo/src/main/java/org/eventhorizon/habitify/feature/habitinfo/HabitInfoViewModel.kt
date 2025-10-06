@@ -22,7 +22,7 @@ class HabitInfoViewModel @Inject constructor(
     private val getHabitByIdUseCase: GetHabitByIdUseCase,
     private val deleteHabitUseCase: DeleteHabitUseCase,
     savedStateHandle: SavedStateHandle
-): ViewModel() {
+) : ViewModel() {
     private val habitId: Int = checkNotNull(savedStateHandle.get<String>("habitId")).toInt()
 
     private val _state = MutableStateFlow(HabitInfoContract.HabitInfoState.State())
@@ -31,8 +31,7 @@ class HabitInfoViewModel @Inject constructor(
     private val _effect = Channel<HabitInfoContract.HabitInfoEffect>()
     val effect = _effect.receiveAsFlow()
 
-    // Это поле нужно для передачи полного объекта в deleteHabitUseCase
-    private var originalHabit: Habit? = null
+    private var originalHabit: Habit? = null //todo думаю стоит продумать альтернативу
 
     init {
         loadHabitDetails()
@@ -47,22 +46,21 @@ class HabitInfoViewModel @Inject constructor(
 
     private fun loadHabitDetails() {
         viewModelScope.launch {
-            // 3. Используем GetHabitByIdUseCase
             val habit = getHabitByIdUseCase(habitId).first()
             if (habit == null) {
-                // TODO: Обработать случай, когда привычка не найдена (например, показать ошибку и выйти)
+                //todo продумать достаточно ли этой обработки
                 _effect.send(HabitInfoContract.HabitInfoEffect.NavigateBackToHome)
                 return@launch
             }
-            originalHabit = habit // Сохраняем оригинальный объект
-
+            originalHabit = habit
             _state.update {
                 it.copy(
                     isLoading = false,
                     habitName = habit.name,
                     daysLeft = habit.daysToFinish,
                     habitColor = Color(habit.color),
-                    markedDates = habit.statistics.filter { stat -> stat.isDone }.map { stat -> stat.day }.toSet()
+                    markedDates = habit.statistics.filter { stat -> stat.isDone }
+                        .map { stat -> stat.day }.toSet()
                 )
             }
         }
@@ -71,10 +69,12 @@ class HabitInfoViewModel @Inject constructor(
     private fun completeHabit() {
         viewModelScope.launch {
             originalHabit?.let {
-                // 4. Используем DeleteHabitUseCase
                 deleteHabitUseCase(it)
-                // Отправляем эффект, чтобы Home показал диалог
-                _effect.send(HabitInfoContract.HabitInfoEffect.NavigateBackWithCompletion(showCongrats = true))
+                _effect.send(
+                    HabitInfoContract.HabitInfoEffect.NavigateBackWithCompletion(
+                        showCongrats = true
+                    )
+                )
             }
         }
     }
@@ -82,7 +82,6 @@ class HabitInfoViewModel @Inject constructor(
     private fun deleteHabit() {
         viewModelScope.launch {
             originalHabit?.let {
-                // 5. Используем тот же DeleteHabitUseCase
                 deleteHabitUseCase(it)
                 _effect.send(HabitInfoContract.HabitInfoEffect.NavigateBackToHome)
             }

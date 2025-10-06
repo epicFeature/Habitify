@@ -17,7 +17,7 @@ import org.eventhorizon.habitify.ui.components.theme.AppColor
 import org.eventhorizon.habitify.ui.components.theme.Shapes
 
 @Composable
-fun HabitInfoStatistics(modifier: Modifier = Modifier) {
+fun HabitInfoStatistics(modifier: Modifier = Modifier) { //todo пока не реализовано, добвить
 
     Column(
         modifier = modifier
@@ -25,7 +25,7 @@ fun HabitInfoStatistics(modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
-        Row (
+        Row(
             modifier = Modifier
                 .fillMaxWidth(),
         ) {
@@ -33,7 +33,9 @@ fun HabitInfoStatistics(modifier: Modifier = Modifier) {
             VerticalDivider(
                 color = AppColor.BgColorLightOrange,
                 thickness = 1.dp,
-                modifier = Modifier.height(90.dp).align(Alignment.Bottom)
+                modifier = Modifier
+                    .height(90.dp)
+                    .align(Alignment.Bottom)
             )
             StatisticsItemCard(Modifier.weight(1F))
         }

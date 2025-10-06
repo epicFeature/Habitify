@@ -10,13 +10,14 @@ val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
+//Todo Унифицировать и уменьшить кол-во цветов
 object AppColor {
     val White = Color(0xFFFFFFFF)
 
     //onboarding
     val OnbBgWhite = Color(0xFFFFFFFF)
     val DarkPurple = Color(0xFF573353)
-    val OnbTextOrange = Color(0xFFFC9D45) //Todo Унифицировать и уменьшить кол-во цветов
+    val OnbTextOrange = Color(0xFFFC9D45)
     val OnbDotOrange = Color(0xFFF9B566)
     val OnbDotPurple = DarkPurple
     val OnbDotPurpleShadow = Color(0x33573353)
@@ -26,7 +27,6 @@ object AppColor {
 
     //main
     val BgColorLightOrange = Color(0xFFFFF3E9)
-    val TopAppBarTextColor = DarkPurple
     val TopAppBarBackBtnBg = Color(0x1A573353)
 
     //home

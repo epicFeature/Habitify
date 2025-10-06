@@ -10,7 +10,6 @@ import org.eventhorizon.habitify.navigation.AppScreens
 
 
 fun NavGraphBuilder.habitInfoScreen(
-    // 1. Принимаем лямбды для навигации
     modifier: Modifier,
     onNavigateBack: () -> Unit,
     onNavigateBackWithCompletion: () -> Unit
@@ -21,24 +20,10 @@ fun NavGraphBuilder.habitInfoScreen(
             type = NavType.StringType
         })
     ) { backStackEntry ->
-        // Мы уже находимся внутри composable, backStackEntry доступен здесь.
-        // viewModel будет создан автоматически с нужным habitId.
         HabitInfoScreen(
             modifier = modifier,
             onNavigateBack = onNavigateBack,
             onNavigateBackWithCompletion = onNavigateBackWithCompletion
         )
-
-        /*val habitId = backStackEntry.arguments?.getString(AppScreens.HabitInfo.ARG_HABIT_ID)
-        // Важно обработать случай, когда habitId может быть null, если это возможно
-        if (habitId != null) {
-            HabitInfoScreen(
-                habitId = habitId
-            )
-        } else {
-            // Обработка ошибки: неизвестный ID или неправильный маршрут
-            // Можно показать экран ошибки или вернуться назад
-            navController.popBackStack()
-        }*/
     }
 }

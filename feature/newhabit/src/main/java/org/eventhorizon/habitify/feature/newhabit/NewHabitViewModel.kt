@@ -20,7 +20,7 @@ import kotlin.random.Random
 class NewHabitViewModel @Inject constructor(
     private val createHabitUseCase: CreateHabitUseCase
 ) : ViewModel(){
-    private val _state = MutableStateFlow< NewHabitContract.NewHabitUiState.State>(
+    private val _state = MutableStateFlow<NewHabitContract.NewHabitUiState.State>(
         NewHabitContract.NewHabitUiState.State()
     )
     val state = _state.asStateFlow()
@@ -34,11 +34,9 @@ class NewHabitViewModel @Inject constructor(
         AppColor.habitIconColorBlue,
         AppColor.habitIconColorRed,
     )
-    private var colorIndex = 0
 
    init{
-        // Начальная инициализация состояния
-        setState()
+        resetAndPrepareState()
     }
 
     fun handleEvent(event: NewHabitContract.NewHabitUiEvent) {
@@ -47,16 +45,15 @@ class NewHabitViewModel @Inject constructor(
             is NewHabitContract.NewHabitUiEvent.OnDurationChanged -> onDurationChanged(event.days)
             is NewHabitContract.NewHabitUiEvent.OnDoneClick -> onDoneClick()
             is NewHabitContract.NewHabitUiEvent.OnDeleteClick -> onDeleteClick()
-            NewHabitContract.NewHabitUiEvent.ResetAndPrepareState -> setState()
+            NewHabitContract.NewHabitUiEvent.ResetAndPrepareState -> resetAndPrepareState()
         }
 
     }
 
-    private fun setState(){
+    private fun resetAndPrepareState(){
         val appearanceDays = MutableList(7) { it < 5 }.apply {shuffle(Random) }
         _state.update {
             it.copy(
-                // Обновляем вложенный объект habit
                 habit = it.habit.copy(color = getNextColor()),
                 appearanceDays = appearanceDays,
                 isDoneButtonEnabled = false
@@ -68,7 +65,7 @@ class NewHabitViewModel @Inject constructor(
         _state.update {
             it.copy(
                 habit = it.habit.copy(name = name),
-                isDoneButtonEnabled = name.isNotBlank() // Кнопка активна, если имя не пустое
+                isDoneButtonEnabled = name.isNotBlank()
             )
         }
     }
@@ -90,14 +87,10 @@ class NewHabitViewModel @Inject constructor(
     private fun onDoneClick() {
         viewModelScope.launch {
             val habitToSave = _state.value.habit.toDomain()
-
-            // Оборачиваем в try-catch на случай ошибок валидации из UseCase
             try {
                 createHabitUseCase(habitToSave)
                 _effect.send(NewHabitContract.NewHabitEffect.NavigateToHome)
-            } catch (e: IllegalArgumentException) {
-                // В будущем здесь можно будет показать ошибку пользователю
-                // _effect.send(NewHabitEffect.ShowError(e.message ?: "An error occurred"))
+            } catch (e: IllegalArgumentException) { //потом можно через effect показывать обработанную ошибку
                 println("Error creating habit: ${e.message}")
             }
         }

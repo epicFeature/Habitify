@@ -33,7 +33,7 @@ fun CustomTopAppBar(
     onBackClick: () -> Unit = {}
 ) {
     CenterAlignedTopAppBar(
-        modifier = modifier.wrapContentHeight(),//todo оптимизировать и скорректировать работу
+        modifier = modifier.wrapContentHeight(),
         title = {
             Text(
                 text = title,
@@ -59,7 +59,7 @@ fun CustomTopAppBar(
                             .padding(16.dp)
                             .background(
                                 color = AppColor.TopAppBarBackBtnBg,
-                                shape = CircleShape //todo проверить что здесь лучше юзать
+                                shape = CircleShape
                             )
                     ) {
                         Icon(
@@ -68,7 +68,6 @@ fun CustomTopAppBar(
                         )
                     }
                 }
-
                 else -> {}
             }
         }

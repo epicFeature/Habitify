@@ -22,10 +22,14 @@ import org.eventhorizon.habitify.ui.components.theme.analyticsSubtitleTextStyle
 import org.eventhorizon.habitify.ui.components.theme.analyticsTitleTextStyle
 
 @Composable
-fun StatisticsItemCard(modifier: Modifier= Modifier, statsTitle: String="Longest Streak", statsData: String="20 Days") {
+fun StatisticsItemCard(
+    modifier: Modifier = Modifier,
+    statsTitle: String = "Longest Streak",
+    statsData: String = "20 Days"
+) { //todo пока не реализовано, добвить
     Row(
         modifier = modifier
-            .padding(start = 18.dp, end=10.dp, top = 18.dp, bottom = 18.dp)
+            .padding(start = 18.dp, end = 10.dp, top = 18.dp, bottom = 18.dp)
             .wrapContentSize()
     ) {
         Column(

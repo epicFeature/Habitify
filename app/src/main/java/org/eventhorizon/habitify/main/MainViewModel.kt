@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val finishOnboardingUseCase: FinishOnboardingUseCase,
-    private val getOnboardingStatusUseCase: GetOnboardingStatusUseCase
+    getOnboardingStatusUseCase: GetOnboardingStatusUseCase
 ): ViewModel() {
 
     val startDestination: StateFlow<StartDestination> = getOnboardingStatusUseCase.invoke()
@@ -40,9 +40,7 @@ class MainViewModel @Inject constructor(
     }
 }
 
-
-
-sealed class StartDestination {
+sealed class StartDestination { //нет потребности в полноценном MVI
     object Loading : StartDestination()
     object Onboarding : StartDestination()
     object Main : StartDestination()

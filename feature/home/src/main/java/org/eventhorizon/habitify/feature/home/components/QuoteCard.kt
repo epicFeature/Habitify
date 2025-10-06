@@ -23,7 +23,12 @@ import org.eventhorizon.habitify.ui.components.theme.homeQuoteAuthorTextStyle
 import org.eventhorizon.habitify.ui.components.theme.homeQuoteTextStyle
 
 @Composable
-fun QuoteCard(modifier: Modifier = Modifier, quoteText: String, quoteAuthor: String, isLoading: Boolean = false) {
+fun QuoteCard(
+    modifier: Modifier = Modifier,
+    quoteText: String,
+    quoteAuthor: String,
+    isLoading: Boolean = false //todo добавить обработку на время загрузки
+) {
     Row(
         modifier = modifier
             .background(AppColor.White, Shapes.medium)

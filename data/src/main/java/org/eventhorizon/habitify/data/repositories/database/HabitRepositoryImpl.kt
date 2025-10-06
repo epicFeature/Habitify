@@ -1,7 +1,5 @@
 package org.eventhorizon.habitify.data.repositories.database
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.eventhorizon.habitify.data.mapper.toDomain
@@ -17,14 +15,12 @@ class HabitRepositoryImpl @Inject constructor(
     private val habitDao: HabitDao
 ) : HabitRepository {
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun getAllHabits(): Flow<List<Habit>> {
         return habitDao.getAllHabits().map { entityList ->
             entityList.map { it.toDomain() }
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun getHabitById(id: Int): Flow<Habit?> {
         return habitDao.getHabitById(id).map { habitEntity ->
             habitEntity?.toDomain()

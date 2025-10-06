@@ -6,7 +6,6 @@ import org.eventhorizon.habitify.domain.model.database.Habit
 import org.eventhorizon.habitify.domain.model.database.HabitStat
 
 
-// Преобразует Entity из базы данных в доменную модель
 fun HabitDbEntity.toDomain(): Habit {
     return Habit(
         id = this.id,
@@ -20,12 +19,11 @@ fun HabitDbEntity.toDomain(): Habit {
 
 fun HabitStatDb.toDomain(): HabitStat{
     return HabitStat(
-        day = this.day,//LocalDate.parse(this.day),
+        day = this.day,
         isDone = this.isDone
     )
 }
 
-// Преобразует доменную модель в Entity для сохранения в базу
 fun Habit.toEntity(): HabitDbEntity {
     return HabitDbEntity(
         id = this.id,
@@ -39,7 +37,7 @@ fun Habit.toEntity(): HabitDbEntity {
 
 fun HabitStat.toEntity(): HabitStatDb {
     return HabitStatDb(
-        day = this.day,//.toString(),
+        day = this.day,
         isDone = this.isDone
     )
 }

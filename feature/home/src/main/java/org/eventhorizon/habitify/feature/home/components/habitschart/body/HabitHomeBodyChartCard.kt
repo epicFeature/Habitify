@@ -31,15 +31,6 @@ fun HabitHomeBodyChartCard(
             )
         }
     }
-//    Column(modifier = modifier) {
-//        HabitHomeCard(onClick = onHabitClick, habitName = "quit smoking")
-//        Spacer(Modifier.size(6.dp))
-//        HabitHomeCard(onClick = onHabitClick, habitName = "early wake ups")
-//        Spacer(Modifier.size(6.dp))
-//        HabitHomeCard(onClick = onHabitClick, habitName = "do exercise")
-//        Spacer(Modifier.size(6.dp))
-//        HabitHomeCard(onClick = onHabitClick, habitName = "healthy food")
-//    }
 }
 
 @Preview(showBackground = true, widthDp = 500)

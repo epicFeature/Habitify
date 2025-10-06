@@ -15,21 +15,18 @@ class OnboardingRepositoryImpl @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) : OnboardingRepository {
 
-    // Создаем ключ, по которому будет храниться наше значение.
     private object PreferencesKeys {
-        val IS_ONBOARDING_FINISHED = booleanPreferencesKey("is_onboarding_finished")
+        val IS_ONBOARDING_FINISHED_KEY = booleanPreferencesKey("is_onboarding_finished")
     }
 
     override val isOnboardingFinished: Flow<Boolean> = dataStore.data
         .map { preferences ->
-            // Читаем значение по ключу. Если его там нет, возвращаем 'false' по умолчанию.
-            preferences[PreferencesKeys.IS_ONBOARDING_FINISHED] ?: false
+            preferences[PreferencesKeys.IS_ONBOARDING_FINISHED_KEY] ?: false
         }
 
     override suspend fun finishOnboarding() {
-        // Безопасно изменяем значение в DataStore.
         dataStore.edit { preferences ->
-            preferences[PreferencesKeys.IS_ONBOARDING_FINISHED] = true
+            preferences[PreferencesKeys.IS_ONBOARDING_FINISHED_KEY] = true
         }
     }
 }

@@ -1,7 +1,5 @@
 package org.eventhorizon.habitify.feature.habitinfo
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -34,17 +32,15 @@ import org.eventhorizon.habitify.ui.components.theme.AppColor.OnbBtnOrange
 import org.eventhorizon.habitify.ui.components.theme.Shapes
 import org.eventhorizon.habitify.ui.components.theme.congratsDialogBtnTextStyle
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HabitInfoScreen(
     modifier: Modifier = Modifier,
-    onNavigateBack: ()-> Unit,
+    onNavigateBack: () -> Unit,
     onNavigateBackWithCompletion: () -> Unit,
     viewModel: HabitInfoViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    // Слушаем эффекты для навигации
     LaunchedEffect(key1 = Unit) {
         viewModel.effect.collect { effect ->
             when (effect) {
@@ -54,7 +50,7 @@ fun HabitInfoScreen(
         }
     }
 
-    Column( //todo добавить скролируемость
+    Column(
         modifier = modifier
             .padding(horizontal = 20.dp)
             .fillMaxSize()
@@ -73,7 +69,7 @@ fun HabitInfoScreen(
             habitColor = state.habitColor
         )
         Spacer(Modifier.size(36.dp))
-        //HabitInfoStatistics()
+        //HabitInfoStatistics() //todo добавить позже при интеграции статистики
         //Spacer(Modifier.size(16.dp))
         Button(
             onClick = { viewModel.setEvent(HabitInfoContract.HabitInfoEvent.OnCompleteClick) },
@@ -96,7 +92,7 @@ fun HabitInfoScreen(
         }
         Spacer(Modifier.height(10.dp))
         Button(
-            onClick = {viewModel.setEvent(HabitInfoContract.HabitInfoEvent.OnDeleteClick)},
+            onClick = { viewModel.setEvent(HabitInfoContract.HabitInfoEvent.OnDeleteClick) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 8.dp),
@@ -114,11 +110,10 @@ fun HabitInfoScreen(
                 style = congratsDialogBtnTextStyle
             )
         }
-        Spacer(Modifier.height(40.dp)) // Отступ снизу
+        Spacer(Modifier.height(40.dp))
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true, heightDp = 2000)
 @Composable
 private fun PreviewHabitInfoScreen() {

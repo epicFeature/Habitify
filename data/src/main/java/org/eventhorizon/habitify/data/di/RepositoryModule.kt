@@ -23,9 +23,8 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideHabitRepository(
-        habitDao: HabitDao // <-- Запрашиваем зависимость здесь
+        habitDao: HabitDao
     ): HabitRepository {
-        // Вручную создаем экземпляр
         return HabitRepositoryImpl(habitDao)
     }
 

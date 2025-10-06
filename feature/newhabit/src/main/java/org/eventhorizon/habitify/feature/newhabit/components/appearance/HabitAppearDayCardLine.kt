@@ -17,7 +17,7 @@ fun HabitAppearDayCardLine(
     modifier: Modifier,
     appearanceDays: List<Boolean>,
     color: Color = AppColor.habitIconColorYellow) {
-    Row(modifier = modifier
+    Row(modifier = modifier //todo в очереди на оптимизацию
         .background(AppColor.BgColorLightOrange),
         horizontalArrangement = Arrangement.Center
     ) {

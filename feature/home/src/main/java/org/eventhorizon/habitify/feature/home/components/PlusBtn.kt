@@ -8,7 +8,7 @@ import org.eventhorizon.habitify.ui.components.IconData
 import org.eventhorizon.habitify.ui.components.LargeRoundBtn
 
 @Composable
-fun PlusBtn(modifier: Modifier = Modifier, onClick: ()->Unit ) {
+fun PlusBtn(modifier: Modifier = Modifier, onClick: () -> Unit) {
     LargeRoundBtn(
         modifier = modifier,
         iconData = IconData(R.drawable.ic_add, "add"),

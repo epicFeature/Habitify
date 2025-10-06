@@ -22,7 +22,7 @@ fun LargeRoundBtn(
     iconData: IconData = IconData(R.drawable.ic_add, "Add"),
     onClick: () -> Unit,
     size: Int = 64,
-    iconSizeCoef: Double = 0.5,
+    iconSizeCoefficient: Double = 0.5,
     enabled: Boolean = true
 ) {
     Box(
@@ -45,7 +45,7 @@ fun LargeRoundBtn(
             Icon(
                 painter = painterResource(iconData.iconRes),
                 contentDescription = iconData.contentDescription,
-                modifier = Modifier.size((size*iconSizeCoef).dp),
+                modifier = Modifier.size((size*iconSizeCoefficient).dp),
                 tint = AppColor.DarkPurple
             )
         }

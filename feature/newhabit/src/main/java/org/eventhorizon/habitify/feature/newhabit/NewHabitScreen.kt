@@ -1,7 +1,5 @@
 package org.eventhorizon.habitify.feature.newhabit
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,7 +22,6 @@ import org.eventhorizon.habitify.feature.newhabit.components.duration.HabitDurat
 import org.eventhorizon.habitify.feature.newhabit.components.topcard.HabitNameCard
 import org.eventhorizon.habitify.ui.components.theme.AppColor
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NewHabitScreen(
     modifier: Modifier,
@@ -33,15 +30,13 @@ fun NewHabitScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(Unit) { //для обновления цвета
         viewModel.handleEvent(NewHabitContract.NewHabitUiEvent.ResetAndPrepareState)
     }
 
-    // 2. Слушаем одноразовые эффекты (например, для навигации)
     LaunchedEffect(key1 = Unit) {
         viewModel.effect.collect { effect ->
             when (effect) {
-                // Если пришел эффект "NavigateToHome", вызываем колбэк
                 NewHabitContract.NewHabitEffect.NavigateToHome -> onNavigateHome()
             }
         }
@@ -52,7 +47,13 @@ fun NewHabitScreen(
             modifier = Modifier,
             habitName = state.habit.name,
             habitColor = state.habit.color,
-            onHabitNameChanged = { viewModel.handleEvent(NewHabitContract.NewHabitUiEvent.OnHabitNameChanged(it)) }
+            onHabitNameChanged = {
+                viewModel.handleEvent(
+                    NewHabitContract.NewHabitUiEvent.OnHabitNameChanged(
+                        it
+                    )
+                )
+            }
         )
         Spacer(Modifier.size(8.dp))
         HabitAppearanceCard(
@@ -65,18 +66,27 @@ fun NewHabitScreen(
         HabitDurationPlan(
             modifier = Modifier,
             color = state.habit.color,
-            onDaysSelected = { days -> viewModel.handleEvent(NewHabitContract.NewHabitUiEvent.OnDurationChanged(days)) }
+            onDaysSelected = { days ->
+                viewModel.handleEvent(
+                    NewHabitContract.NewHabitUiEvent.OnDurationChanged(
+                        days
+                    )
+                )
+            }
         )
         Spacer(Modifier.weight(1F))
-        Row (modifier=Modifier.fillMaxWidth()){
+        Row(modifier = Modifier.fillMaxWidth()) {
             DeleteBtn(onClick = { viewModel.handleEvent(NewHabitContract.NewHabitUiEvent.OnDeleteClick) })
             Spacer(Modifier.weight(1F))
-            DoneBtn (onClick = { viewModel.handleEvent(NewHabitContract.NewHabitUiEvent.OnDoneClick) }, enabled = state.isDoneButtonEnabled)
+            DoneBtn(
+                onClick = { viewModel.handleEvent(NewHabitContract.NewHabitUiEvent.OnDoneClick) },
+                enabled = state.isDoneButtonEnabled
+            )
         }
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 @Preview(showBackground = true)
 @Composable
 private fun PreviewNewHabitScreen() {

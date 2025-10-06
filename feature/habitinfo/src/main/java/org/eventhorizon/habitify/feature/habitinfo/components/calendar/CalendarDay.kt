@@ -1,7 +1,5 @@
 package org.eventhorizon.habitify.feature.habitinfo.components.calendar
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -27,7 +25,6 @@ import org.eventhorizon.habitify.ui.components.theme.Shapes
 import org.eventhorizon.habitify.ui.components.theme.calendarDateTextStyle
 import java.time.LocalDate
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CalendarDay(
     modifier: Modifier = Modifier,
@@ -54,7 +51,6 @@ fun CalendarDay(
             horizontalAlignment = Alignment.CenterHorizontally
 
             ) {
-            // Число
             Text(
                 text = date.dayOfMonth.toString(),
                 modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -63,7 +59,6 @@ fun CalendarDay(
                 color = if (isCurrentMonth) AppColor.DarkPurple else AppColor.DarkPurple.copy(0.3F)
             )
             Spacer(Modifier.size(6.dp))
-            // Квадрат для трекера
             HabitCheckCalendarCard(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 color = color,
@@ -83,7 +78,6 @@ fun CalendarDay(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 private fun PreviewCalendarDayChecked() {
@@ -96,7 +90,6 @@ private fun PreviewCalendarDayChecked() {
     )
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 private fun PreviewCalendarDayUnchecked() {
@@ -110,7 +103,6 @@ private fun PreviewCalendarDayUnchecked() {
     )
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 private fun PreviewCalendarDayCheckedNextMonth() {

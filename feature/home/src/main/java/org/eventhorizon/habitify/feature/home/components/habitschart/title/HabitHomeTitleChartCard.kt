@@ -18,7 +18,6 @@ import org.eventhorizon.habitify.ui.components.theme.homeChartTitleTextStyle
 @Composable
 fun HabitHomeTitleChartCard(
     modifier: Modifier = Modifier,
-    // 2. Принимаем список дней, а не просто title
     days: List<HomeContract.HomeUiState.State.ChartDay>
 ) {
     Row(
@@ -38,11 +37,10 @@ fun HabitHomeTitleChartCard(
         DateHomeLineCard(
             modifier = Modifier,
             days = days
-        ) //todo потом перенести это внутрь dateHomeLineCard по аналогии с боди
+        )
     }
 }
 
-// 5. Обновляем Preview для наглядности
 @Preview(showBackground = true, widthDp = 1000)
 @Composable
 private fun PreviewHabitHomeTitleChartCard() {
@@ -51,7 +49,7 @@ private fun PreviewHabitHomeTitleChartCard() {
         HomeContract.HomeUiState.State.ChartDay("02", "ВТ", false),
         HomeContract.HomeUiState.State.ChartDay("03", "СР", false),
         HomeContract.HomeUiState.State.ChartDay("04", "ЧТ", false),
-        HomeContract.HomeUiState.State.ChartDay("05", "ПТ", true), // Сегодня
+        HomeContract.HomeUiState.State.ChartDay("05", "ПТ", true),
     )
     HabitHomeTitleChartCard(
         days = previewDays

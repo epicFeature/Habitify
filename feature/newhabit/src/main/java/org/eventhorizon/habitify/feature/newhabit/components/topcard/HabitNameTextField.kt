@@ -38,8 +38,8 @@ fun HabitNameTextField(
             focusedPlaceholderColor = AppColor.DarkPurple.copy(0.5F),
             unfocusedPlaceholderColor = AppColor.DarkPurple.copy(0.5F)
         ),
-        placeholder = {
-            Text(text = "Enter habit name", style = textFieldTextStyle) // Ваш хинт
+        placeholder = { // хинт
+            Text(text = "Enter habit name", style = textFieldTextStyle)
         },
         textStyle = textFieldTextStyle
     )

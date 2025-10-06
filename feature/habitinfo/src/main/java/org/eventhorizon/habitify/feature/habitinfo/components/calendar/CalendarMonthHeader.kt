@@ -17,25 +17,28 @@ import org.eventhorizon.habitify.ui.components.theme.AppColor
 import org.eventhorizon.habitify.ui.components.theme.calendarMonthTextStyle
 
 @Composable
-fun CalendarMonthHeader(modifier: Modifier = Modifier, monthTitle: String, onPreviousMonthClick: ()->Unit, onNextMonthClick: ()->Unit) {
+fun CalendarMonthHeader(
+    modifier: Modifier = Modifier,
+    monthTitle: String,
+    onPreviousMonthClick: () -> Unit,
+    onNextMonthClick: () -> Unit
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = modifier
             .fillMaxWidth()
     ) {
-        IconButton(onClick =onPreviousMonthClick) {
+        IconButton(onClick = onPreviousMonthClick) {
             Icon(
                 painter = painterResource(R.drawable.ic_arrow_left),
                 contentDescription = "Previous Month"
             )
         }
-
         Text(
             text = monthTitle,
             style = calendarMonthTextStyle,
         )
-
         IconButton(onClick = onNextMonthClick) {
             Icon(
                 painter = painterResource(R.drawable.ic_arrow_right),

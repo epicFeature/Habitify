@@ -32,15 +32,13 @@ import org.eventhorizon.habitify.ui.components.theme.AppColor
 fun HomeScreen(
     modifier: Modifier = Modifier,
     showCongratsDialogOnStart: Boolean = false,
-    onOpenNewHabitScreenClick: () -> Unit, //add new habit
+    onOpenNewHabitScreenClick: () -> Unit,
     onOpenHabitInfoClick: (habitId: String) -> Unit,
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
-    // Подписываемся на состояние и эффекты
     val uiState by homeViewModel.uiState.collectAsStateWithLifecycle()
 
-    // 2. При первом запуске экрана сообщаем ViewModel, нужно ли показать диалог
-    LaunchedEffect(Unit) {
+    LaunchedEffect(Unit) { //если нужно показываем диалог после перехода
         if (showCongratsDialogOnStart) {
             homeViewModel.setEvent(HomeContract.HomeUiEvent.OnShowCongratsDialog)
         }
@@ -106,7 +104,7 @@ fun HomeScreen(
                         HomeContract.HomeUiEvent.OnHabitCardClick(habitId)
                     )
                 }
-            ) //todo пока так с // отступом, дальше решить как лучше
+            )
             Spacer(
                 Modifier
                     .weight(1F)
@@ -118,9 +116,11 @@ fun HomeScreen(
                 .padding(18.dp)
                 .size(72.dp)
                 .align(Alignment.BottomCenter),
-            onClick = {  homeViewModel.setEvent(
-                HomeContract.HomeUiEvent.OnAddHabitClick
-            ) }
+            onClick = {
+                homeViewModel.setEvent(
+                    HomeContract.HomeUiEvent.OnAddHabitClick
+                )
+            }
         )
     }
 

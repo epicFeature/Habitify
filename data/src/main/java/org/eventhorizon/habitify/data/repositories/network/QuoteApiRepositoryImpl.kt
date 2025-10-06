@@ -10,13 +10,11 @@ import javax.inject.Singleton
 
 @Singleton
 class QuoteApiRepositoryImpl @Inject constructor(
-    private val quoteApiService: QuoteApiService // Hilt предоставляет эту зависимость
+    private val quoteApiService: QuoteApiService
 ) : QuoteApiRepository {
 
     override suspend fun getQuoteList(): List<Quote> {
-        // 1. Вызываем suspend-функцию из Retrofit сервиса
         val quoteListDto = quoteApiService.getQuoteListApi()
-        // 2. Маппим "сырую" DTO модель в "чистую" доменную модель и возвращаем результат
         return quoteListDto.map { it.toDomain() }
     }
 }

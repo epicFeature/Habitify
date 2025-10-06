@@ -30,7 +30,7 @@ fun HabitHomeCard(
     habit: HomeContract.HomeUiState.State.HabitForChart,
     onCardClick: (Int) -> Unit,
     onCheckClick: (Int, LocalDate, Boolean) -> Unit
-) { //todo пока хардкод потом заменить
+) {
     Row(
         modifier = modifier
             .background(AppColor.White, Shapes.medium)

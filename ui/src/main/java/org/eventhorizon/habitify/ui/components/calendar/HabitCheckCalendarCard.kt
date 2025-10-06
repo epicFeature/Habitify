@@ -16,7 +16,7 @@ import org.eventhorizon.habitify.ui.components.theme.Shapes
 
 
 @Composable
-fun HabitCheckCalendarCard(modifier: Modifier = Modifier, color: Color, isChecked: Boolean = false) { //todo передавать динамически цвет
+fun HabitCheckCalendarCard(modifier: Modifier = Modifier, color: Color, isChecked: Boolean = false) {
     if (isChecked){
         Box(modifier = modifier
             .size(38.dp)

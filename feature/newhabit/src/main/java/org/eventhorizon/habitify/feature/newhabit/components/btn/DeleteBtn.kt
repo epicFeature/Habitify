@@ -13,7 +13,7 @@ fun DeleteBtn(modifier: Modifier = Modifier, onClick: ()->Unit ) {
         modifier = modifier,
         iconData = IconData(R.drawable.ic_delete, "trash"),
         onClick = onClick,
-        iconSizeCoef = 0.4
+        iconSizeCoefficient = 0.4
     )
 }
 

@@ -17,11 +17,13 @@ fun HabitHomeLineCard(
     modifier: Modifier = Modifier,
     color: Color,
     checks: List<HomeContract.HomeUiState.State.HabitCheck>,
-    onCheckClick: (LocalDate, Boolean) -> Unit) {
-    Row(modifier
-        .padding(horizontal = 14.dp),
+    onCheckClick: (LocalDate, Boolean) -> Unit
+) {
+    Row(
+        modifier
+            .padding(horizontal = 14.dp),
         horizontalArrangement = Arrangement.spacedBy(6.dp)
-    ){
+    ) {
         checks.forEach { check ->
             HabitCheckCard(
                 color = color,
@@ -31,19 +33,6 @@ fun HabitHomeLineCard(
             )
         }
     }
-    /*Row(modifier) {
-        Spacer(Modifier.size(14.dp))
-        HabitCheckCard(color = color, isChecked = true)
-        Spacer(Modifier.size(2.dp))
-        HabitCheckCard(color = color, isChecked = true)
-        Spacer(Modifier.size(2.dp))
-        HabitCheckCard(color = color, isChecked = false)
-        Spacer(Modifier.size(2.dp))
-        HabitCheckCard(color = color, isChecked = true)
-        Spacer(Modifier.size(2.dp))
-        HabitCheckCard(color = color, isChecked = false) //это сегодня
-        Spacer(Modifier.size(14.dp))
-    }*/
 }
 
 @Preview(showBackground = true, widthDp = 500)
@@ -56,15 +45,32 @@ private fun PreviewHabitHomeLineCard() {
             isChecked = true,
             isClickable = false
         ),
-        HomeContract.HomeUiState.State.HabitCheck(today.minusDays(3), isChecked = false, isClickable = false),
-        HomeContract.HomeUiState.State.HabitCheck(today.minusDays(2), isChecked = true, isClickable = false),
-        HomeContract.HomeUiState.State.HabitCheck(today.minusDays(1), isChecked = false, isClickable = false),
-        HomeContract.HomeUiState.State.HabitCheck(today, isChecked = true, isClickable = true) // Сегодняшний день
+        HomeContract.HomeUiState.State.HabitCheck(
+            today.minusDays(3),
+            isChecked = false,
+            isClickable = false
+        ),
+        HomeContract.HomeUiState.State.HabitCheck(
+            today.minusDays(2),
+            isChecked = true,
+            isClickable = false
+        ),
+        HomeContract.HomeUiState.State.HabitCheck(
+            today.minusDays(1),
+            isChecked = false,
+            isClickable = false
+        ),
+        HomeContract.HomeUiState.State.HabitCheck(
+            today,
+            isChecked = true,
+            isClickable = true
+        ) // сегодня кликабельный, ост нет
     )
 
     HabitHomeLineCard(
         checks = previewChecks,
         onCheckClick = { _, _ -> },
         modifier = Modifier,
-        color = AppColor.habitIconColorBlue // В превью обработка кликов не нужна
-    )}
+        color = AppColor.habitIconColorBlue
+    )
+}

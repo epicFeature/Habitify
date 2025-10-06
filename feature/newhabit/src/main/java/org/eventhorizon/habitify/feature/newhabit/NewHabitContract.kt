@@ -13,18 +13,13 @@ interface NewHabitContract {
 
     sealed interface NewHabitUiState {
         data class State(
-            // Теперь все данные о привычке инкапсулированы в одном объекте
             val habit: HabitUi = HabitUi(),
             val appearanceDays: List<Boolean> = emptyList(),
             val isDoneButtonEnabled: Boolean = false
-        )
+        ): NewHabitUiState
     }
 
-    /**
-     * Одноразовые эффекты, которые ViewModel отправляет в UI.
-     */
     sealed interface NewHabitEffect {
-        /** Эффект для навигации на главный экран. */
         object NavigateToHome : NewHabitEffect
     }
 }

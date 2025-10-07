@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "habits")
 data class HabitDbEntity(
-    @PrimaryKey(autoGenerate = true) // id будет генерироваться автоматически
+    @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
     val color: Int,

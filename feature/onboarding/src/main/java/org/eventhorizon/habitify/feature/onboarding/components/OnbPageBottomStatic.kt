@@ -16,6 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
@@ -79,7 +81,10 @@ fun OnbPageBottomStatic(
                     text = stringResource(R.string.onb_screen_skip),
                     modifier = Modifier
                         .align(Alignment.CenterStart)
-                        .clickable(onClick = onSkipClick),
+                        .clickable(onClick = onSkipClick)
+                        .semantics{
+                            contentDescription = "Onboarding Skip Button"
+                        },
                     style = onbSkipNextTextStyle
                 )
                 OnbPagerIndicator(
@@ -101,7 +106,8 @@ fun OnbPageBottomStatic(
                 onClick = onSkipClick,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 8.dp),
+                    .padding(horizontal = 8.dp)
+                    .semantics { contentDescription = "Get Started Button" },
                 contentPadding = PaddingValues(vertical = 22.dp),
                 shape = Shapes.small,
                 colors = ButtonColors(

@@ -11,7 +11,10 @@ import org.eventhorizon.habitify.ui.components.LargeRoundBtn
 fun DoneBtn(modifier: Modifier = Modifier, onClick: ()->Unit, enabled: Boolean) {
     LargeRoundBtn(
         modifier = modifier,
-        iconData = IconData(R.drawable.ic_done, "tick"),
+        iconData = IconData(
+            R.drawable.ic_done,
+            "Save habit button"
+        ),
         onClick = onClick,
         enabled = enabled
     )

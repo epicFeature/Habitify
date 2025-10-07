@@ -8,6 +8,8 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import org.eventhorizon.habitify.ui.components.theme.AppColor
 import org.eventhorizon.habitify.ui.components.theme.Shapes
@@ -17,16 +19,19 @@ import org.eventhorizon.habitify.ui.components.theme.textFieldTextStyle
 fun HabitNameTextField(
     modifier: Modifier,
     habitName: String,
-    onHabitNameChanged: (String)->Unit
+    onHabitNameChanged: (String) -> Unit
 ) {
-
     TextField(
         value = habitName,
         onValueChange = onHabitNameChanged,
         singleLine = true,
         modifier = modifier
             .fillMaxWidth()
-            .wrapContentHeight(),
+            .wrapContentHeight()
+            .semantics {
+                // Задаем текстовое описание для тестирования и доступности
+                contentDescription = "Habit name input"
+            },
         shape = Shapes.medium,
         colors = TextFieldDefaults.colors(
             focusedTextColor = AppColor.DarkPurple,

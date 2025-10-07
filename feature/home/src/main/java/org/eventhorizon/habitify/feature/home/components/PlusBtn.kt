@@ -11,7 +11,10 @@ import org.eventhorizon.habitify.ui.components.LargeRoundBtn
 fun PlusBtn(modifier: Modifier = Modifier, onClick: () -> Unit) {
     LargeRoundBtn(
         modifier = modifier,
-        iconData = IconData(R.drawable.ic_add, "add"),
+        iconData = IconData(
+            R.drawable.ic_add,
+            "Add habit button"
+        ),
         onClick = onClick
     )
 }

@@ -21,6 +21,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -50,6 +52,7 @@ fun CongratulationsDialog(
                 .background(AppColor.White, Shapes.large)
                 .fillMaxWidth()
                 .wrapContentHeight(Alignment.Top)
+                .semantics { contentDescription = "Congratulations Dialog" }
                 .padding(20.dp),
             verticalArrangement = Arrangement.Top
         ) {
@@ -66,7 +69,7 @@ fun CongratulationsDialog(
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_cross),
-                    contentDescription = "Back"
+                    contentDescription = "Close dialog"
                 )
             }
             Image(
@@ -84,7 +87,9 @@ fun CongratulationsDialog(
             Spacer(Modifier.height(8.dp))
             Text(
                 text = "Вы на шаг ближе к своей цели. Так держать!",
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .semantics { contentDescription = "Congratulations!" },
                 textAlign = TextAlign.Center,
                 style = congratsDialogSubtitleTextStyle
             )
@@ -92,6 +97,7 @@ fun CongratulationsDialog(
             Button(
                 onClick = onCreateNewHabit,
                 modifier = Modifier
+                    .semantics { contentDescription = "Create new habit button" }
                     .fillMaxWidth()
                     .padding(horizontal = 8.dp),
                 contentPadding = PaddingValues(vertical = 22.dp),
@@ -112,6 +118,7 @@ fun CongratulationsDialog(
             Button(
                 onClick = onContinue,
                 modifier = Modifier
+                    .semantics { contentDescription = "Continue button" }
                     .fillMaxWidth()
                     .padding(horizontal = 8.dp),
                 contentPadding = PaddingValues(vertical = 22.dp),

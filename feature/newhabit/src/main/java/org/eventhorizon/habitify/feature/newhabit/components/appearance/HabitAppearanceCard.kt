@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,7 +36,10 @@ fun HabitAppearanceCard(
         Text(
             text = habitName.uppercase().ifBlank { "Название привычки" },
             modifier = Modifier
-                .padding(18.dp),
+                .padding(18.dp)
+                .semantics{
+                    contentDescription = "Appearance card title"
+                },
             textAlign = TextAlign.Center,
             style = homeChartHabitTitleTextStyle
         )

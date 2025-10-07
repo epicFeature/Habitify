@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.eventhorizon.habitify.ui.components.theme.AppColor
@@ -27,6 +29,13 @@ fun HabitCheckCard(
                 .size(54.dp)
                 .background(color.copy(0.1F), Shapes.medium)
                 .clickable(enabled = isClickable, onClick = onClick)
+                .semantics {
+                    contentDescription = if (isClickable) { //todo возможно лучше оптимизировать на будущее
+                        "Checkbox for today"
+                    } else {
+                        "Checkbox for previous day"
+                    }
+                }
         ) {
             Box(
                 modifier = modifier

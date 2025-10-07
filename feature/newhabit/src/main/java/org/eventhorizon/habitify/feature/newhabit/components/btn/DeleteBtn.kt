@@ -8,10 +8,13 @@ import org.eventhorizon.habitify.ui.components.IconData
 import org.eventhorizon.habitify.ui.components.LargeRoundBtn
 
 @Composable
-fun DeleteBtn(modifier: Modifier = Modifier, onClick: ()->Unit ) {
+fun DeleteBtn(modifier: Modifier = Modifier, onClick: () -> Unit) {
     LargeRoundBtn(
         modifier = modifier,
-        iconData = IconData(R.drawable.ic_delete, "trash"),
+        iconData = IconData(
+            R.drawable.ic_delete,
+            "Delete habit button"
+        ),
         onClick = onClick,
         iconSizeCoefficient = 0.4
     )

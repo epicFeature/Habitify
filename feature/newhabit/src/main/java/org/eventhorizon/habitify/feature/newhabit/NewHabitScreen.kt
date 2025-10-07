@@ -42,13 +42,32 @@ fun NewHabitScreen(
         }
     }
 
+    // Вызываем "глупую" версию, которая отвечает только за отрисовку
+    NewHabitScreenContent(
+        modifier = modifier,
+        state = state,
+        onEvent = viewModel::handleEvent // Передаем обработчик событий
+    )
+}
+
+
+/**
+ * Эта версия экрана отвечает ТОЛЬКО за UI. Она ничего не знает о ViewModel или Hilt.
+ * Именно ее мы будем использовать в тестах и превью.
+ */
+@Composable
+fun NewHabitScreenContent(
+    modifier: Modifier = Modifier,
+    state: NewHabitContract.NewHabitUiState.State,
+    onEvent: (NewHabitContract.NewHabitUiEvent) -> Unit
+){
     Column(modifier = modifier.padding(20.dp)) {
         HabitNameCard(
             modifier = Modifier,
             habitName = state.habit.name,
             habitColor = state.habit.color,
             onHabitNameChanged = {
-                viewModel.handleEvent(
+                onEvent(
                     NewHabitContract.NewHabitUiEvent.OnHabitNameChanged(
                         it
                     )
@@ -67,7 +86,7 @@ fun NewHabitScreen(
             modifier = Modifier,
             color = state.habit.color,
             onDaysSelected = { days ->
-                viewModel.handleEvent(
+                onEvent(
                     NewHabitContract.NewHabitUiEvent.OnDurationChanged(
                         days
                     )
@@ -76,10 +95,10 @@ fun NewHabitScreen(
         )
         Spacer(Modifier.weight(1F))
         Row(modifier = Modifier.fillMaxWidth()) {
-            DeleteBtn(onClick = { viewModel.handleEvent(NewHabitContract.NewHabitUiEvent.OnDeleteClick) })
+            DeleteBtn(onClick = { onEvent(NewHabitContract.NewHabitUiEvent.OnDeleteClick) })
             Spacer(Modifier.weight(1F))
             DoneBtn(
-                onClick = { viewModel.handleEvent(NewHabitContract.NewHabitUiEvent.OnDoneClick) },
+                onClick = { onEvent(NewHabitContract.NewHabitUiEvent.OnDoneClick) },
                 enabled = state.isDoneButtonEnabled
             )
         }

@@ -17,5 +17,9 @@ dependencies{
     implementation(libs.javax.inject)
     //coroutines+flow
     implementation(libs.kotlinx.coroutines.core)
+    //Default test
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.kotlinx.coroutines.test)
 
 }

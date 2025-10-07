@@ -8,6 +8,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,9 +29,10 @@ fun HabitNameTextField(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
+            .testTag("habitNameTextField")
             .semantics {
                 // Задаем текстовое описание для тестирования и доступности
-                contentDescription = "Habit name input"
+                contentDescription = "Habit name text field"
             },
         shape = Shapes.medium,
         colors = TextFieldDefaults.colors(
@@ -44,7 +46,7 @@ fun HabitNameTextField(
             unfocusedPlaceholderColor = AppColor.DarkPurple.copy(0.5F)
         ),
         placeholder = { // хинт
-            Text(text = "Enter habit name", style = textFieldTextStyle)
+            Text(text = "Введи название привычки", style = textFieldTextStyle)
         },
         textStyle = textFieldTextStyle
     )

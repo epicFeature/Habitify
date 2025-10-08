@@ -46,7 +46,7 @@
 
 ## 📁 Структура приложение
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/ad94281c-3abd-4d2d-aca4-6785280b9fca" />
+  <img src="https://github.com/user-attachments/assets/b8dcbd7e-4f76-48af-a0ac-de4a7fb1ba30" />
 </p>
 
 

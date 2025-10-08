@@ -62,7 +62,7 @@
 
 ### Основные экраны
 | HomeScreen | NewHabitScreen | HabitInfoScreen |
-|---------------|------------|---------|
+|------------|----------------|-----------------|
 | <img src="https://github.com/user-attachments/assets/d6b89fdc-afe3-43ac-a804-46cf18ae33db" width="200"> | <img src="https://github.com/user-attachments/assets/e6939e19-2e63-4bb6-a715-69a20618d47f" width="200"> | <img src="https://github.com/user-attachments/assets/90ac5a02-c05e-4ea6-bf83-e01ae80b969d" width="200"> |
 | <img src="https://github.com/user-attachments/assets/a8f25241-bc5b-455e-bca8-d425c71457ae" width="200"> | <img src="https://github.com/user-attachments/assets/c05e12a1-25fa-4ce0-ac55-0afc335cb39a" width="200"> | <img src="https://github.com/user-attachments/assets/b82f5e1b-781f-4646-9ee1-774bcc682170" width="200"> |
 | <img src="https://github.com/user-attachments/assets/5426af46-e5b0-4d64-9793-e6f065efc5b6" width="200"> | <img src="https://github.com/user-attachments/assets/dca3df32-f286-45a9-b750-9cca67a7e74b" width="200"> | <img src="https://github.com/user-attachments/assets/f9a24582-fc58-48f7-9a4e-5f8bbf2361fa" width="200"> |

@@ -42,19 +42,15 @@ fun NewHabitScreen(
         }
     }
 
-    // Вызываем "глупую" версию, которая отвечает только за отрисовку
+    // "Глупая" версия -> отвечает только за отрисовку
     NewHabitScreenContent(
         modifier = modifier,
         state = state,
-        onEvent = viewModel::handleEvent // Передаем обработчик событий
+        onEvent = viewModel::handleEvent
     )
 }
 
-
-/**
- * Эта версия экрана отвечает ТОЛЬКО за UI. Она ничего не знает о ViewModel или Hilt.
- * Именно ее мы будем использовать в тестах и превью.
- */
+//такая реализация удобна для тестирования
 @Composable
 fun NewHabitScreenContent(
     modifier: Modifier = Modifier,

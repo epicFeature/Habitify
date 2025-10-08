@@ -38,13 +38,13 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
-        compose = true // Если :app использует Compose
+        compose = true
     }
 }
 
 detekt {
     config.setFrom(files("$rootDir/detekt.yml"))
-    buildUponDefaultConfig = true // Наследовать настройки от дефолтных
+    buildUponDefaultConfig = true // наследуем настройки от дефолтных
 }
 
 dependencies {
@@ -86,8 +86,7 @@ dependencies {
     debugImplementation (libs.rooms.db)
     releaseImplementation (libs.rooms.db.no.op)
 
-    //Default test
-    // JUnit4 для запуска тестов
+    //Test
     androidTestImplementation(libs.junit)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -97,15 +96,12 @@ dependencies {
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
-
     // Kaspresso
     androidTestImplementation(libs.kaspresso)
     androidTestImplementation(libs.kaspresso.compose)
-
     // Hilt Testing, чтобы внедрять зависимости в тестах
     androidTestImplementation(libs.hilt.android.testing)
-    kspAndroidTest(libs.hilt.compiler) // или kspAndroidTest
-
+    kspAndroidTest(libs.hilt.compiler)
     //Default debug
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)

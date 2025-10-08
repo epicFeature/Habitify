@@ -39,12 +39,10 @@ android {
 
 detekt {
     config.setFrom(files("$rootDir/detekt.yml"))
-    buildUponDefaultConfig = true // Наследовать настройки от дефолтных
+    buildUponDefaultConfig = true // наследуем настройки от дефолтных
 }
 
 dependencies {
-    //todo нужно понять зависит лио т какого-то модуля или нет
-
     //Default android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

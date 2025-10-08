@@ -15,14 +15,16 @@ kotlin {
 
 detekt {
     config.setFrom(files("$rootDir/detekt.yml"))
-    buildUponDefaultConfig = true // Наследовать настройки от дефолтных
+    buildUponDefaultConfig = true // наследуем настройки от дефолтных
 }
 
 dependencies{
     //inject
     implementation(libs.javax.inject)
+
     //coroutines+flow
     implementation(libs.kotlinx.coroutines.core)
+
     //Default test
     testImplementation(libs.junit)
     testImplementation(libs.mockito.kotlin)

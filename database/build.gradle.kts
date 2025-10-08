@@ -38,7 +38,7 @@ android {
 
 detekt {
     config.setFrom(files("$rootDir/detekt.yml"))
-    buildUponDefaultConfig = true // Наследовать настройки от дефолтных
+    buildUponDefaultConfig = true // наследуем настройки от дефолтных
 }
 
 dependencies {
@@ -56,8 +56,8 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     annotationProcessor(libs.androidx.room.compiler)
     implementation(libs.converter.gson)
-    ksp(libs.androidx.room.compiler) // Для Kotlin
-    implementation(libs.androidx.room.ktx) // Kotlin Extensions
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 
     //datastore
     implementation(libs.androidx.datastore.preferences)

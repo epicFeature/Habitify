@@ -39,7 +39,7 @@ android {
 
 detekt {
     config.setFrom(files("$rootDir/detekt.yml"))
-    buildUponDefaultConfig = true // Наследовать настройки от дефолтных
+    buildUponDefaultConfig = true //наследуем настройки от дефолтных
 }
 
 dependencies {
@@ -47,7 +47,7 @@ dependencies {
     implementation(project(":ui"))
     implementation(project(":navigation"))
 
-//Default android
+    //Default android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

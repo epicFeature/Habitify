@@ -27,7 +27,7 @@ class HabitInfoViewModelTest {
     val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @get:Rule
-    val mainCoroutineRule = MainCoroutineRule() // Наше новое правило для корутин!
+    val mainCoroutineRule = MainCoroutineRule()
 
     @Mock
     private lateinit var getHabitByIdUseCase: GetHabitByIdUseCase
@@ -37,7 +37,7 @@ class HabitInfoViewModelTest {
 
     private lateinit var viewModel: HabitInfoViewModel
 
-    // --- Сценарий 1: Успешная загрузка привычки при инициализации ---
+    // 1: Success загрузка привычки при инициализации
     @Test
     fun init_whenHabitExists_shouldUpdateStateWithHabitDetails() = runTest {
         // 1. ARRANGE
@@ -51,53 +51,44 @@ class HabitInfoViewModelTest {
             daysToFinish = 15,
             statistics = listOf(HabitStat(today, true), HabitStat(today.minusDays(1), false))
         )
-        // Обучаем UseCase возвращать наш тестовый Flow
         whenever(getHabitByIdUseCase(habitId)).thenReturn(flowOf(habit))
-
         // 2. ACT
-        // Инициализируем ViewModel с SavedStateHandle, содержащим наш ID
         viewModel = HabitInfoViewModel(
             getHabitByIdUseCase,
             deleteHabitUseCase,
             SavedStateHandle(mapOf("habitId" to habitId.toString()))
         )
-
         // 3. ASSERT
         viewModel.state.test {
-            val loadedState = awaitItem() // Получаем последнее состояние после загрузки
+            val loadedState = awaitItem()
             assertFalse(loadedState.isLoading)
             assertEquals("Read a book", loadedState.habitName)
             assertEquals(15, loadedState.daysLeft)
-            // Проверяем, что в markedDates попала только выполненная статистика
             assertEquals(setOf(today), loadedState.markedDates)
         }
     }
 
-    // --- Сценарий 2: Привычка не найдена при инициализации ---
+    // 2. Failure. Habit not fount. Привычка при иниц не найдена
     @Test
     fun init_whenHabitDoesNotExist_shouldSendNavigateBackEffect() = runTest {
         // 1. ARRANGE
         val nonExistentId = 999
-        // Обучаем UseCase возвращать null в потоке
         whenever(getHabitByIdUseCase(nonExistentId)).thenReturn(flowOf(null))
-
         // 2. ACT
         viewModel = HabitInfoViewModel(
             getHabitByIdUseCase,
             deleteHabitUseCase,
             SavedStateHandle(mapOf("habitId" to nonExistentId.toString()))
         )
-
         // 3. ASSERT
-        // Проверяем, что ViewModel отправила эффект навигации назад
         viewModel.effect.test {
             assertEquals(HabitInfoContract.HabitInfoEffect.NavigateBackToHome, awaitItem())
         }
     }
 
-    // --- Сценарий 3: Нажатие на кнопку удаления ---
+    // 3. Нажатие на кнопку удаления
     @Test
-    fun `setEvent OnDeleteClick_shouldCallDeleteUseCaseAndSendNavigateBackEffect`() = runTest {
+    fun setEvent_OnDeleteClick_shouldCallDeleteUseCaseAndSendNavigateBackEffect() = runTest {
         // 1. ARRANGE
         val habitId = 42
         val habit = Habit(habitId, "Habit to delete", 1, 10, 10, emptyList())
@@ -108,26 +99,19 @@ class HabitInfoViewModelTest {
             deleteHabitUseCase,
             SavedStateHandle(mapOf("habitId" to habitId.toString()))
         )
-
-        // Пропускаем начальное состояние, чтобы убедиться, что оно загружено
         viewModel.state.test { awaitItem() }
-
         // 2. ACT
-        // Отправляем событие удаления
         viewModel.setEvent(HabitInfoContract.HabitInfoEvent.OnDeleteClick)
-
         // 3. ASSERT
-        // Проверяем, что был вызван UseCase с правильным объектом
         verify(deleteHabitUseCase).invoke(habit)
-        // Проверяем, что был отправлен эффект навигации назад
         viewModel.effect.test {
             assertEquals(HabitInfoContract.HabitInfoEffect.NavigateBackToHome, awaitItem())
         }
     }
 
-    // --- Сценарий 4: Нажатие на кнопку завершения ---
+    // 4. Нажатие на кнопку выполнения
     @Test
-    fun `setEvent OnCompleteClick_shouldCallDeleteUseCaseAndSendNavigateBackWithCompletionEffect`() = runTest {
+    fun setEvent_OnCompleteClick_shouldCallDeleteUseCaseAndSendNavigateBackWithCompletionEffect() = runTest {
         // 1. ARRANGE
         val habitId = 42
         val habit = Habit(habitId, "Habit to complete", 1, 10, 10, emptyList())
@@ -137,11 +121,9 @@ class HabitInfoViewModelTest {
             deleteHabitUseCase,
             SavedStateHandle(mapOf("habitId" to habitId.toString()))
         )
-        viewModel.state.test { awaitItem() } // Убеждаемся, что привычка загружена
-
+        viewModel.state.test { awaitItem() }
         // 2. ACT
         viewModel.setEvent(HabitInfoContract.HabitInfoEvent.OnCompleteClick)
-
         // 3. ASSERT
         verify(deleteHabitUseCase).invoke(habit)
         viewModel.effect.test {

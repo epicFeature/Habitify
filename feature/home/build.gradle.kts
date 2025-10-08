@@ -39,7 +39,7 @@ android {
 
 detekt {
     config.setFrom(files("$rootDir/detekt.yml"))
-    buildUponDefaultConfig = true // Наследовать настройки от дефолтных
+    buildUponDefaultConfig = true //наследуем настройки от дефолтных
 }
 
 dependencies {
@@ -71,7 +71,7 @@ dependencies {
     debugImplementation(libs.logger)
     releaseImplementation(libs.logger.no.op)
 
-    //coroutine todo нужны ли они
+    //coroutine
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 

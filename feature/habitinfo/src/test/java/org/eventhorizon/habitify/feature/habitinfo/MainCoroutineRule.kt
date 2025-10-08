@@ -9,24 +9,18 @@ import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
 
-/**
- * JUnit Rule, который заменяет главный диспетчер (Dispatchers.Main) на тестовый
- * на время выполнения теста. Это позволяет корутинам, использующим viewModelScope,
- * выполняться синхронно в тестах.
- */
 @ExperimentalCoroutinesApi
 class MainCoroutineRule(
-    // Позволяет использовать разные диспатчеры, UnconfinedTestDispatcher подходит для большинства ViewModel тестов
     private val testDispatcher: TestDispatcher = UnconfinedTestDispatcher()
 ) : TestWatcher() {
 
     override fun starting(description: Description) {
         super.starting(description)
-        Dispatchers.setMain(testDispatcher) // Заменяем Main на тестовый
+        Dispatchers.setMain(testDispatcher) // заменяем main на тестовый
     }
 
     override fun finished(description: Description) {
         super.finished(description)
-        Dispatchers.resetMain() // Возвращаем реальный Main диспетчер
+        Dispatchers.resetMain() // возвращаем реальный main диспетчер
     }
 }

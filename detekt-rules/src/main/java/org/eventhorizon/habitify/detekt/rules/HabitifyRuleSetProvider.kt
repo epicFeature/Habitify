@@ -5,12 +5,12 @@ import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
 
 class HabitifyRuleSetProvider : RuleSetProvider {
-    override val ruleSetId: String = "HabitifyCustom"
+    override val ruleSetId: String = "HabitifyCustom" //это название используем в detekt
     override fun instance(config: Config): RuleSet {
         return RuleSet(
             id = ruleSetId,
             rules = listOf(
-                NoPrintlnInAppCodeRule(config)             // Новое правило
+                NoPrintlnInAppCodeRule(config)  //тут добавляем свои правила
             )
         )
     }

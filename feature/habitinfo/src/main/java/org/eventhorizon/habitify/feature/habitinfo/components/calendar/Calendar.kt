@@ -64,7 +64,7 @@ fun Calendar(
             onNextMonthClick = { currentMonth = currentMonth.plusMonths(1) }
         )
         Spacer(Modifier.size(16.dp))
-        CalendarDayOfWeekHeader(modifier = Modifier.padding(horizontal = 3.dp)) //todo скорректировать на русский
+        CalendarDayOfWeekHeader(modifier = Modifier.padding(horizontal = 3.dp))
         Spacer(Modifier.size(8.dp))
         CalendarDaysGrid(
             modifier = Modifier.padding(horizontal = 2.dp),
@@ -93,7 +93,7 @@ private fun CalendarPreview() {
     ) {
         Calendar(
             markedDates = previewMarkedDates,
-            habitColor = AppColor.habitIconColorRed // Используем другой цвет для наглядности
+            habitColor = AppColor.habitIconColorRed
         )
     }
 }

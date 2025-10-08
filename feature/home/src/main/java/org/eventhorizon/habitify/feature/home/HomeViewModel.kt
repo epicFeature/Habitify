@@ -83,16 +83,16 @@ class HomeViewModel @Inject constructor(
                     it.copy(
                         isLoadingQuote = false,
                         quoteText = randomQuote?.quote
-                            ?: "Your life does not get better by chance, it gets better by change.",
-                        quoteAuthor = randomQuote?.author ?: "Jim Rohn"
+                            ?: "Ваша жизнь становится лучше не по воле случая, а в результате изменений.",
+                        quoteAuthor = randomQuote?.author ?: "Джим Рон"
                     )
                 }
             }.onFailure { exception ->
                 _uiState.update {
                     it.copy(
                         isLoadingQuote = false,
-                        quoteText = "Your life does not get better by chance, it gets better by change.", // Запасной вариант
-                        quoteAuthor = "Jim Rohn"
+                        quoteText = "Ваша жизнь становится лучше не по воле случая, а в результате изменений.", // Запасной вариант
+                        quoteAuthor = "Джим Рон"
                     )
                 }
             }

@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.detekt)
 }
 
-
 android {
     namespace = "org.eventhorizon.habitify.data"
     compileSdk = 36
@@ -38,7 +37,7 @@ android {
 
 detekt {
     config.setFrom(files("$rootDir/detekt.yml"))
-    buildUponDefaultConfig = true // Наследовать настройки от дефолтных
+    buildUponDefaultConfig = true // наследуем настройки от дефолтных
 }
 
 dependencies {
@@ -67,8 +66,8 @@ dependencies {
     debugImplementation (libs.logger)
     releaseImplementation (libs.logger.no.op)
 
-    //coroutine todo нужны ли они
-    implementation(libs.kotlinx.coroutines.core)
+    //coroutine
+    implementation(libs.kotlinx.coroutines.core) //проверить нужны ли
     implementation(libs.kotlinx.coroutines.android)
 
     //Default test

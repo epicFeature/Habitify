@@ -31,7 +31,6 @@ fun HabitNameTextField(
             .wrapContentHeight()
             .testTag("habitNameTextField")
             .semantics {
-                // Задаем текстовое описание для тестирования и доступности
                 contentDescription = "Habit name text field"
             },
         shape = Shapes.medium,

@@ -13,58 +13,43 @@ import org.jetbrains.kotlin.resolve.calls.util.getResolvedCall
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameOrNull
 
 class NoPrintlnInAppCodeRule(config: Config) : Rule(config) {
-
-    // 1. Описываем суть проблемы (Issue)
-    override val issue = Issue(
+    override val issue = Issue(  // cуть проблемы - issue
         id = "NoPrintlnInAppCode",
-        severity = Severity.Warning, // Это скорее проблема стиля и поддержки, чем баг
-        description = "Usage of 'print' or 'println' is forbidden in app code. " +
-                "Please use a proper logging library like Android's Log or Timber.",
-        debt = Debt.FIVE_MINS // Исправить это очень быстро
+        severity = Severity.Warning, // не очень критично
+        description = "Использование 'print' или 'println' запрещено в коде приложения. " +
+                "Пожалуйста, используйте подходящую библиотеку для логирования, например, Android Log или Timber.",
+        debt = Debt.FIVE_MINS // можно быстро исправить
     )
-
-    // 2. Список запрещенных функций
-    private val forbiddenFunctions = setOf(
+    private val forbiddenFunctions = setOf( // cписок запрещенных функций
         "kotlin.io.println",
         "kotlin.io.print"
     )
 
-    // 3. Переопределяем метод visit для файла, чтобы отсечь тестовые директории
-    override fun visit(root: KtFile) {
-        // Получаем путь к файлу
-        val filePath = root.virtualFilePath.toString()
-
-        // Если путь содержит маркеры тестовых директорий, прекращаем анализ этого файла
-        if (filePath.contains("/src/test/") ||
-            filePath.contains("/src/androidTest/")) {
+    override fun visit(root: KtFile) { // переопределяем чтобы исключить тест директории
+        val filePath = root.virtualFilePath.toString() // получ путь к файлу
+        if (filePath.contains("/src/test/") || //проверяем есть ли маркеры тестовых директорий -> прекращаем анализ этого файла
+            filePath.contains("/src/androidTest/")
+        ) {
             return
         }
-
-        // Если это не тест, продолжаем обход дерева файла
-        super.visit(root)
+        super.visit(root) // продолжаем обход дерева файла
     }
 
-    // 4. "Посещаем" каждый вызов функции в коде
-    override fun visitCallExpression(expression: KtCallExpression) {
+    override fun visitCallExpression(expression: KtCallExpression) { // рассматриваем каждый вызов функции в коде
         super.visitCallExpression(expression)
-
-        // Используем bindingContext для получения полной информации о вызове
-        val resolvedCall = expression.getResolvedCall(bindingContext) ?: return
-
-        // Получаем полное имя функции (например, "kotlin.io.println")
-        val functionFqName = resolvedCall.resultingDescriptor.fqNameOrNull()?.asString()
-
-        // 5. Проверяем, есть ли вызванная функция в нашем списке запрещенных
-        if (functionFqName in forbiddenFunctions) {
-            // Если да, создаем отчет (CodeSmell)
-            val errorMessage = "'$functionFqName' is a part of forbidden API. " +
-                    "Use a logger for better diagnostics and manageability."
+        val resolvedCall = expression.getResolvedCall(bindingContext) ?: return //полн инфа о вызове
+        val functionFqName =
+            resolvedCall.resultingDescriptor.fqNameOrNull()?.asString() //полн имя ф-ции
+        if (functionFqName in forbiddenFunctions) { //проверяем есть ли она в списке запрещенных
+            // если да -> создаем отчет (CodeSmell)
+            val errorMessage = "'$functionFqName' является частью запрещенного API. " +
+                    "Используйте логгер для лучшей диагностики и управляемости."
             report(CodeSmell(issue, Entity.from(expression), errorMessage))
         }
     }
 }
 
-//при новой попытке подключения нужно будет добавить
+//при новой попытке подключения нужно будет добавить (пока бехуспешно)
 //HabitifyCustom:
 //  active: true
 //  NoPrintlnInAppCode:

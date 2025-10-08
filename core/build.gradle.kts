@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -34,6 +35,11 @@ android {
     }
 }
 
+detekt {
+    config.setFrom(files("$rootDir/detekt.yml"))
+    buildUponDefaultConfig = true // Наследовать настройки от дефолтных
+}
+
 dependencies {
 
     //basic
@@ -52,4 +58,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //detekt
+    compileOnly(libs.detekt.api)
+    detektPlugins(project(":detekt-rules"))
 }

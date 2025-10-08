@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -34,6 +35,11 @@ android {
         jvmTarget = "17"
     }
     buildFeatures { compose = true }
+}
+
+detekt {
+    config.setFrom(files("$rootDir/detekt.yml"))
+    buildUponDefaultConfig = true // Наследовать настройки от дефолтных
 }
 
 dependencies {
@@ -82,4 +88,8 @@ dependencies {
     // Hilt Testing, чтобы внедрять зависимости в тестах
     androidTestImplementation(libs.hilt.android.testing)
     kspAndroidTest(libs.hilt.compiler) // или kspAndroidTest
+
+    //detekt
+    compileOnly(libs.detekt.api)
+    detektPlugins(project(":detekt-rules"))
 }

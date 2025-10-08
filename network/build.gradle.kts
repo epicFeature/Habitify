@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -32,6 +33,11 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+}
+
+detekt {
+    config.setFrom(files("$rootDir/detekt.yml"))
+    buildUponDefaultConfig = true // Наследовать настройки от дефолтных
 }
 
 dependencies {
@@ -73,4 +79,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.kotlinx.coroutines.test)
+
+    //detekt
+    compileOnly(libs.detekt.api)
+    detektPlugins(project(":detekt-rules"))
 }

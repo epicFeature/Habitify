@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -39,6 +40,11 @@ android {
     buildFeatures {
         compose = true // Если :app использует Compose
     }
+}
+
+detekt {
+    config.setFrom(files("$rootDir/detekt.yml"))
+    buildUponDefaultConfig = true // Наследовать настройки от дефолтных
 }
 
 dependencies {
@@ -108,4 +114,8 @@ dependencies {
     implementation(libs.google.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
+    //detekt
+    compileOnly(libs.detekt.api)
+    detektPlugins(project(":detekt-rules"))
 }

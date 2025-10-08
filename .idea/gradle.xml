@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/database" />
             <option value="$PROJECT_DIR$/datastore" />
+            <option value="$PROJECT_DIR$/detekt-rules" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/habitinfo" />

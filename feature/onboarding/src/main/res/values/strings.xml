@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    //onb screen
+    <string name="onb_screen_title_1_2">Добро пожаловать в мир устойчивых привычек</string>
+    <string name="onb_screen_title_3">Внедряй новые привычки с легкостью</string>
+    <string name="onb_screen_title_4">Наблюдай за своим прогрессом</string>
+    <string name="onb_screen_title_5">Читай новые вдохновляющие цитаты каждый день</string>
+    <string name="onb_screen_subtitle">Мы поможем тебе стать лучшей версией себя</string>
+    <string name="onb_screen_skip">Пропустить</string>
+    <string name="onb_screen_next">Далее</string>
+    <string name="onb_screen_get_start">Начнём</string>
+
+</resources>

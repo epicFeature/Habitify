@@ -41,7 +41,7 @@
 
 ## 📁 Структура модулей
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/a38784a1-003e-4e64-8640-cada09824872" />
+  <img src="https://github.com/user-attachments/assets/0d8593d9-7ea8-49b0-a07d-329d494ef0f3" />
 </p>
 
 ## 📁 Структура приложение

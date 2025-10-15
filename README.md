@@ -30,7 +30,7 @@
 | **Single Activity + Jetpack Compose** | ✅ |
 | **Многомодульность** | ✅ |
 | **MVI (самописный) + ViewModel** | ✅ |
-| **Слоистая архитектура Data/Domain/Presentation** | ✅|
+| **Clean Architecture** | ✅|
 | **DI - Hilt** | ✅ |
 | **Coroutines, Flow** | ✅ |
 | **Retrofit + Gson** | ✅ |
@@ -44,7 +44,7 @@
   <img src="https://github.com/user-attachments/assets/0d8593d9-7ea8-49b0-a07d-329d494ef0f3" />
 </p>
 
-## 📁 Структура приложение
+## 📁 Структура приложения
 <p align="center">
   <img src="https://github.com/user-attachments/assets/b8dcbd7e-4f76-48af-a0ac-de4a7fb1ba30" />
 </p>
